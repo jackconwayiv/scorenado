@@ -31,6 +31,7 @@ const wingspanCategories = [
     description: "points from bird cards in your tableau",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
   {
     id: 2,
@@ -38,6 +39,7 @@ const wingspanCategories = [
     description: "points from completing bonus cards",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
   {
     id: 3,
@@ -45,6 +47,7 @@ const wingspanCategories = [
     description: "points from placement in end-of-round goals",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
   {
     id: 4,
@@ -52,6 +55,7 @@ const wingspanCategories = [
     description: "each egg is worth 1 point",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
   {
     id: 5,
@@ -59,6 +63,7 @@ const wingspanCategories = [
     description: "each food on a card is worth 1 point",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
   {
     id: 6,
@@ -66,6 +71,7 @@ const wingspanCategories = [
     description: "each tucked card is worth 1 point",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
   {
     id: 7,
@@ -74,6 +80,7 @@ const wingspanCategories = [
       "for each habitat, most nectar is 5 points and second most is 2 points",
     isScored: false,
     isManualTotal: false,
+    templateId: 1,
   },
 ];
 
