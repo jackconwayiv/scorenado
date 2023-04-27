@@ -55,7 +55,6 @@ app.get("/api/games/:id", async (req: Request, res: Response) => {
 
 app.post("/api/score", async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     const newScore = await Score.create(req.body);
     res.send(newScore);
   } catch (error: unknown) {
