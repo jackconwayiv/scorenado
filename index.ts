@@ -1,10 +1,8 @@
 import dotenv from "dotenv";
-import express, { Express } from "express";
 import seedDatabase from "./db/seeders/seed";
-
+import app from "./server/app";
 dotenv.config();
 
-const app: Express = express();
 const port = process.env.PORT;
 
 const init = async () => {
