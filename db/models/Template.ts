@@ -1,9 +1,9 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+import { DataType } from "sequelize-typescript";
+import db from "../db";
 
 const Template = db.define("template", {
   name: {
-    type: Sequelize.STRING,
+    type: DataType.STRING,
     allowNull: false,
     validate: {
       notNull: true,
@@ -11,13 +11,13 @@ const Template = db.define("template", {
     },
   },
   scoredByRounds: {
-    type: Sequelize.BOOLEAN,
+    type: DataType.BOOLEAN,
     defaultValue: false,
   },
   lowScoreWins: {
-    type: Sequelize.BOOLEAN,
+    type: DataType.BOOLEAN,
     defaultValue: false,
   },
 });
 
-module.exports = Template;
+export default Template;

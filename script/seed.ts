@@ -1,4 +1,10 @@
 //no users for v0;
+
+import db from "../db";
+import Category from "../db/models/Category";
+import Game from "../db/models/Game";
+import Template from "../db/models/Template";
+
 const firstGame = {
   id: 1,
   templateId: 1,
@@ -11,6 +17,7 @@ const firstGame = {
   playerName7: "Michael",
   playerName8: "Oswald",
 };
+
 const wingspanTemplate = {
   id: 1,
   name: "Wingspan",
@@ -69,3 +76,15 @@ const wingspanCategories = [
     isManualTotal: false,
   },
 ];
+
+const seedDatabase = async () => {
+  await db.sync({ force: true });
+  console.log("database synced! seeding data:");
+  await Template.create(wingspanTemplate);
+  await Game.create(firstGame);
+  await Category.bulkCreate(wingspanCategories);
+  console.log("Seeding successful!");
+  await db.close();
+};
+
+export default seedDatabase;

@@ -1,15 +1,25 @@
 import dotenv from "dotenv";
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
+import seedDatabase from "./script/seed";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server is running");
-});
+const init = async () => {
+  try {
+    await seedDatabase();
+    app.listen(port, () => {
+      console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+    });
+  } catch (ex) {
+    console.log(ex);
+  }
+};
 
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+// app.get("/", (req: Request, res: Response) => {
+//   res.send("Express + TypeScript Server is running");
+// });
+
+init();

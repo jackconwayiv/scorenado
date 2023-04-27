@@ -1,9 +1,9 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+import { DataType } from "sequelize-typescript";
+import db from "../db";
 
 const Category = db.define("category", {
   name: {
-    type: Sequelize.STRING,
+    type: DataType.STRING,
     allowNull: false,
     validate: {
       notNull: true,
@@ -11,16 +11,16 @@ const Category = db.define("category", {
     },
   },
   description: {
-    type: Sequelize.STRING,
+    type: DataType.STRING,
   },
   isScored: {
-    type: Sequelize.BOOLEAN,
+    type: DataType.BOOLEAN,
     defaultValue: true,
   },
   isManualTotal: {
-    type: Sequelize.BOOLEAN,
+    type: DataType.BOOLEAN,
     defaultValue: false,
   },
 });
 
-module.exports = Category;
+export default Category;
