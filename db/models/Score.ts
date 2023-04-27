@@ -6,13 +6,13 @@ import { sequelize } from ".";
 interface ScoreAttributes {
   id: number;
   value1: number;
-  value2: number;
-  value3: number;
-  value4: number;
-  value5: number;
-  value6: number;
-  value7: number;
-  value8: number;
+  value2: number | null;
+  value3: number | null;
+  value4: number | null;
+  value5: number | null;
+  value6: number | null;
+  value7: number | null;
+  value8: number | null;
 }
 
 interface ScoreCreationAttributes extends Optional<ScoreAttributes, "id"> {}
@@ -42,24 +42,31 @@ const Score = sequelize.define<ScoreInstance>("Score", {
   },
   value2: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
   value3: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
   value4: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
   value5: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
   value6: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
   value7: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
   value8: {
     type: DataType.INTEGER,
+    allowNull: true,
   },
 });
 

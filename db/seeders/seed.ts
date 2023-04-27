@@ -1,11 +1,23 @@
 //no users for v0;
 
 // import db from "../db";
-import { Category, Game, Template } from "../";
+import { Category, Game, Score, Template } from "../";
 import sequelize from "../index";
 
 const firstGame = {
   id: 1,
+  templateId: 1,
+  playerName1: "Jennifer",
+  playerName2: "Roger",
+  playerName3: "Sally",
+  playerName4: "Leroy",
+  // playerName5: null,
+  // playerName6: null,
+  // playerName7: null,
+  // playerName8: null,
+};
+const currentGame = {
+  id: 2,
   templateId: 1,
   playerName1: "Alphonso",
   playerName2: "Cecilia",
@@ -82,24 +94,79 @@ const wingspanCategories = [
     templateId: 1,
   },
 ];
-// const firstScore = {
-//   id: 1,
-//   templateId: 1,
-//   value1: 1,
-//   value2: 1,
-//   value3: 1,
-//   value4: 1,
-//   value5: 1,
-//   value6: 1,
-//   value7: 1,
-//   value8: 1,
-// };
+const firstScores = [
+  {
+    id: 1,
+    categoryId: 1,
+    gameId: 1,
+    value1: 33,
+    value2: 50,
+    value3: 42,
+    value4: 42,
+  },
+  {
+    id: 2,
+    categoryId: 2,
+    gameId: 1,
+    value1: 8,
+    value2: 12,
+    value3: 6,
+    value4: 12,
+  },
+  {
+    id: 3,
+    categoryId: 3,
+    gameId: 1,
+    value1: 22,
+    value2: 10,
+    value3: 13,
+    value4: 4,
+  },
+  {
+    id: 4,
+    categoryId: 4,
+    gameId: 1,
+    value1: 26,
+    value2: 12,
+    value3: 6,
+    value4: 4,
+  },
+  {
+    id: 5,
+    categoryId: 5,
+    gameId: 1,
+    value1: 0,
+    value2: 0,
+    value3: 7,
+    value4: 0,
+  },
+  {
+    id: 6,
+    categoryId: 6,
+    gameId: 1,
+    value1: 9,
+    value2: 2,
+    value3: 6,
+    value4: 21,
+  },
+  {
+    id: 7,
+    categoryId: 7,
+    gameId: 1,
+    value1: 8,
+    value2: 4,
+    value3: 0,
+    value4: 8,
+  },
+];
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
   console.log("database synced! seeding data:");
   await Template.create(wingspanTemplate);
   await Game.create(firstGame);
+  await Game.create(currentGame);
   await Category.bulkCreate(wingspanCategories);
+  await Score.bulkCreate(firstScores);
   // await Score.sync({ force: true });
   // await Score.create(firstScore);
   console.log("Seeding successful!");

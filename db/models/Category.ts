@@ -6,7 +6,7 @@ import { sequelize } from ".";
 interface CategoryAttributes {
   id: number;
   name: string;
-  description: string;
+  description?: string;
   isScored: boolean;
   isManualTotal: boolean;
 }

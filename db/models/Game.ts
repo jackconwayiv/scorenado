@@ -6,13 +6,13 @@ import { sequelize } from ".";
 interface GameAttributes {
   id: number;
   playerName1: string;
-  playerName2: string;
-  playerName3: string;
-  playerName4: string;
-  playerName5: string;
-  playerName6: string;
-  playerName7: string;
-  playerName8: string;
+  playerName2: string | null;
+  playerName3: string | null;
+  playerName4: string | null;
+  playerName5: string | null;
+  playerName6: string | null;
+  playerName7: string | null;
+  playerName8: string | null;
 }
 
 interface GameCreationAttributes extends Optional<GameAttributes, "id"> {}
@@ -42,24 +42,31 @@ const Game = sequelize.define<GameInstance>("Game", {
   },
   playerName2: {
     type: DataType.STRING,
+    allowNull: true,
   },
   playerName3: {
     type: DataType.STRING,
+    allowNull: true,
   },
   playerName4: {
     type: DataType.STRING,
+    allowNull: true,
   },
   playerName5: {
     type: DataType.STRING,
+    allowNull: true,
   },
   playerName6: {
     type: DataType.STRING,
+    allowNull: true,
   },
   playerName7: {
     type: DataType.STRING,
+    allowNull: true,
   },
   playerName8: {
     type: DataType.STRING,
+    allowNull: true,
   },
 });
 

@@ -20,18 +20,18 @@ Template.hasMany(Category, {
   as: "categories",
 });
 Category.belongsTo(Template, { foreignKey: "templateId", as: "template" });
-Category.hasMany(Score, {
-  sourceKey: "id",
-  foreignKey: "categoryId",
-  as: "scores",
-});
-Score.belongsTo(Category, { foreignKey: "categoryId", as: "category" });
 Game.hasMany(Score, {
   sourceKey: "id",
   foreignKey: "gameId",
   as: "scores",
 });
 Score.belongsTo(Game, { foreignKey: "gameId", as: "game" });
+Category.hasMany(Score, {
+  sourceKey: "id",
+  foreignKey: "categoryId",
+  as: "scores",
+});
+Score.belongsTo(Category, { foreignKey: "categoryId", as: "category" });
 
 export default sequelize;
 

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Game } from "../db";
+import { Category, Game, Score, Template } from "../db";
 const morgan = require("morgan");
 const app = express();
 
@@ -17,17 +17,37 @@ app.use(express.json());
 // static file-serving middleware
 // app.use(express.static(path.join(__dirname, "..", "public")));
 
-//fetch a full game object -- is there a way to exclude the scores associated with the game, and only have it associated with the category?
-//i.e. will i run into trouble when there are multiple games with the same template and categories? will it aggressively load all scores for that category?
+//feels incorrect to re-include Game at the deepest nest level but this produces the desired data shape (for now)
 app.get("/api/games/:id", async (req: Request, res: Response) => {
   try {
     const gameId: number = parseInt(req.params.id);
-    console.log("gameId is ", gameId);
     const myGame = await Game.findByPk(gameId, {
-      // include: { model: Template, as: "template" },
-      include: { all: true, nested: true },
+      include: [
+        {
+          model: Template,
+          as: "template",
+          include: [
+            {
+              model: Category,
+              as: "categories",
+              include: [
+                {
+                  model: Score,
+                  as: "scores",
+                  include: [
+                    {
+                      model: Game,
+                      as: "game",
+                      where: { id: gameId },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     });
-    console.log("myGame is ", myGame);
     res.send(myGame);
   } catch (error: unknown) {
     console.error("Sorry, we encountered an error: ", error);
