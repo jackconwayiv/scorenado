@@ -1,4 +1,5 @@
-import db from "./db";
+// import db from "./db";
+import { sequelize } from "./models";
 
 import Category from "./models/Category";
 import Game from "./models/Game";
@@ -15,7 +16,7 @@ Score.belongsTo(Category);
 Score.belongsTo(Game);
 Game.hasMany(Score);
 
-export default db;
+export default sequelize;
 
 export { Game };
 export { Template };

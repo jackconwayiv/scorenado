@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express, { Express } from "express";
-import seedDatabase from "./script/seed";
+import seedDatabase from "./db/seeders/seed";
 
 dotenv.config();
 

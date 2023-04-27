@@ -1,9 +1,9 @@
 //no users for v0;
 
-import db from "../db";
-import Category from "../db/models/Category";
-import Game from "../db/models/Game";
-import Template from "../db/models/Template";
+// import db from "../db";
+import { sequelize } from "../models";
+import Game from "../models/Game";
+import Template from "../models/Template";
 
 const firstGame = {
   id: 1,
@@ -83,15 +83,30 @@ const wingspanCategories = [
     templateId: 1,
   },
 ];
-
+const firstScore = {
+  id: 1,
+  templateId: 1,
+  value1: 1,
+  value2: 1,
+  value3: 1,
+  value4: 1,
+  value5: 1,
+  value6: 1,
+  value7: 1,
+  value8: 1,
+};
 const seedDatabase = async () => {
-  await db.sync({ force: true });
+  // await db.sync({ force: true });
+  await sequelize.sync({ force: true });
   console.log("database synced! seeding data:");
   await Template.create(wingspanTemplate);
   await Game.create(firstGame);
-  await Category.bulkCreate(wingspanCategories);
+  // await Category.bulkCreate(wingspanCategories);
+  // await Score.sync({ force: true });
+  // await Score.create(firstScore);
   console.log("Seeding successful!");
-  await db.close();
+  // await db.close();
+  await sequelize.close();
 };
 
 export default seedDatabase;

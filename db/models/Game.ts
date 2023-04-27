@@ -1,7 +1,37 @@
+import { Model, Optional } from "sequelize";
 import { DataType } from "sequelize-typescript";
-import db from "../db";
+import { sequelize } from ".";
+//DataTypes ??
 
-const Game = db.define("game", {
+interface GameAttributes {
+  id: number;
+  playerName1: string;
+  playerName2: string;
+  playerName3: string;
+  playerName4: string;
+  playerName5: string;
+  playerName6: string;
+  playerName7: string;
+  playerName8: string;
+}
+
+interface GameCreationAttributes extends Optional<GameAttributes, "id"> {}
+
+interface GameInstance
+  extends Model<GameAttributes, GameCreationAttributes>,
+    GameAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const Game = sequelize.define<GameInstance>("Game", {
+  id: {
+    type: DataType.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    unique: true,
+  },
   playerName1: {
     type: DataType.STRING,
     allowNull: false,

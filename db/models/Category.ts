@@ -1,7 +1,34 @@
+import { Model, Optional } from "sequelize";
 import { DataType } from "sequelize-typescript";
-import db from "../db";
+import { sequelize } from ".";
+//DataTypes ??
 
-const Category = db.define("category", {
+interface CategoryAttributes {
+  id: number;
+  name: string;
+  description: string;
+  isScored: boolean;
+  isManualTotal: boolean;
+}
+
+interface CategoryCreationAttributes
+  extends Optional<CategoryAttributes, "id"> {}
+
+interface CategoryInstance
+  extends Model<CategoryAttributes, CategoryCreationAttributes>,
+    CategoryAttributes {
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const Category = sequelize.define<CategoryInstance>("Category", {
+  id: {
+    type: DataType.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    unique: true,
+  },
   name: {
     type: DataType.STRING,
     allowNull: false,
