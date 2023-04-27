@@ -106,9 +106,9 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "include": [ 
-    "server/**/*"
-  ],
+  // "include": [ 
+  //   "server/**/*"
+  // ],
   "exclude": [
     "node_modules",
     "frontend"
