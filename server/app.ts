@@ -10,10 +10,6 @@ app.use(express.json());
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "ejs");
 
-// auth and api routes
-// app.use("/auth", require("./auth"));
-// app.use("/api", require("./api"));
-
 // static file-serving middleware
 // app.use(express.static(path.join(__dirname, "..", "public")));
 
@@ -50,16 +46,25 @@ app.get("/api/games/:id", async (req: Request, res: Response) => {
     });
     res.send(myGame);
   } catch (error: unknown) {
-    console.error("Sorry, we encountered an error: ", error);
+    console.error(
+      `Sorry, we encountered an error while trying to load game #${req.params.id}: `,
+      error,
+    );
   }
 });
 
-// // define a route handler for the default home page
-// app.get(
-//   "/",
-//   (error: unknown, req: Request, res: Response, next: NextFunction) =>
-//     res.send("base uri"),
-// );
+app.post("/api/score", async (req: Request, res: Response) => {
+  try {
+    console.log(req.body);
+    const newScore = await Score.create(req.body);
+    res.send(newScore);
+  } catch (error: unknown) {
+    console.error(
+      "Sorry, we encountered an error while trying to save that score: ",
+      error,
+    );
+  }
+});
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
 // app.use((req, res, next) => {

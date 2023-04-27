@@ -96,7 +96,7 @@ const wingspanCategories = [
 ];
 const firstScores = [
   {
-    id: 1,
+    id: 111,
     categoryId: 1,
     gameId: 1,
     value1: 33,
@@ -105,7 +105,7 @@ const firstScores = [
     value4: 42,
   },
   {
-    id: 2,
+    id: 112,
     categoryId: 2,
     gameId: 1,
     value1: 8,
@@ -114,7 +114,7 @@ const firstScores = [
     value4: 12,
   },
   {
-    id: 3,
+    id: 113,
     categoryId: 3,
     gameId: 1,
     value1: 22,
@@ -123,7 +123,7 @@ const firstScores = [
     value4: 4,
   },
   {
-    id: 4,
+    id: 114,
     categoryId: 4,
     gameId: 1,
     value1: 26,
@@ -132,7 +132,7 @@ const firstScores = [
     value4: 4,
   },
   {
-    id: 5,
+    id: 115,
     categoryId: 5,
     gameId: 1,
     value1: 0,
@@ -141,7 +141,7 @@ const firstScores = [
     value4: 0,
   },
   {
-    id: 6,
+    id: 116,
     categoryId: 6,
     gameId: 1,
     value1: 9,
@@ -150,7 +150,7 @@ const firstScores = [
     value4: 21,
   },
   {
-    id: 7,
+    id: 117,
     categoryId: 7,
     gameId: 1,
     value1: 8,
@@ -166,6 +166,7 @@ const seedDatabase = async () => {
   await Game.create(firstGame);
   await Game.create(currentGame);
   await Category.bulkCreate(wingspanCategories);
+  // await sequelize.query("ALTER SEQUENCE Categories_id_seq RESTART WITH 8;");
   await Score.bulkCreate(firstScores);
   // await Score.sync({ force: true });
   // await Score.create(firstScore);
