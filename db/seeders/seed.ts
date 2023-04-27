@@ -1,9 +1,8 @@
 //no users for v0;
 
 // import db from "../db";
-import { sequelize } from "../models";
-import Game from "../models/Game";
-import Template from "../models/Template";
+import { Category, Game, Template } from "../";
+import sequelize from "../index";
 
 const firstGame = {
   id: 1,
@@ -101,7 +100,7 @@ const seedDatabase = async () => {
   console.log("database synced! seeding data:");
   await Template.create(wingspanTemplate);
   await Game.create(firstGame);
-  // await Category.bulkCreate(wingspanCategories);
+  await Category.bulkCreate(wingspanCategories);
   // await Score.sync({ force: true });
   // await Score.create(firstScore);
   console.log("Seeding successful!");
