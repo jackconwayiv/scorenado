@@ -1,16 +1,15 @@
-import { Category } from "./Models";
+import { Category, Score } from "./Models";
 
-const pullScoresIntoArray = (category: Category) => {
-  return [
-    category.scores[0].value1,
-    category.scores[0].value2,
-    category.scores[0].value3,
-    category.scores[0].value4,
-    category.scores[0].value5,
-    category.scores[0].value6,
-    category.scores[0].value7,
-    category.scores[0].value8,
-  ];
+const pullScoresIntoArray = (category: Category, players: number) => {
+  let scoresArray = [];
+  for (let p = 1; p <= players; p++) {
+    const key = `value${p}` as keyof Score;
+    const scoreValue = category.scores[0][key] as number | null;
+    if (scoreValue !== null) {
+      scoresArray.push(scoreValue);
+    }
+  }
+  return scoresArray;
 };
 
 export default pullScoresIntoArray;

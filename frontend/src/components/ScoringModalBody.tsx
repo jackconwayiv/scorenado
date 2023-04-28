@@ -15,7 +15,7 @@ interface ScoringModalBodyProps {
   gameId: number;
   setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
   category: Category;
-  playersArray: Array<string | null>;
+  playersArray: Array<string>;
 }
 const ScoringModalBody = ({
   gameId,
@@ -25,11 +25,9 @@ const ScoringModalBody = ({
 }: ScoringModalBodyProps) => {
   const [scoresArray, setScoresArray] = useState<Array<number | null>>([]);
 
-  //one state array of scores for this category
-
   useEffect(() => {
     if (category && category.scores && category.scores.length > 0) {
-      setScoresArray(pullScoresIntoArray(category));
+      setScoresArray(pullScoresIntoArray(category, playersArray.length));
     } else {
       setScoresArray(
         playersArray.map((player) => {
@@ -53,7 +51,6 @@ const ScoringModalBody = ({
     return scoreSubmission;
   };
 
-  //loops numberOfPlayers times and makes a score column for each player
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const scoreSubmission = buildScoreSubmission();
@@ -69,7 +66,6 @@ const ScoringModalBody = ({
 
   return (
     <div>
-      {JSON.stringify(scoresArray)}
       <Table>
         <Thead>
           <Tr>
@@ -80,50 +76,19 @@ const ScoringModalBody = ({
         </Thead>
         <Tbody>
           <Tr>
-            {/* map over scores array in state */}
-            <Td>
-              <ScoreRowColumn
-                key={1}
-                index={0}
-                val={scoresArray[0]}
-                rewriteScoresArray={rewriteScoresArray}
-              />
-            </Td>
-            {/* {playersArray.length > 1 && (
-              <Td>
-                <ScoreRowColumn key={2} val={val2} valSetter={setVal2} />
-              </Td>
-            )}
-            {playersArray.length > 2 && (
-              <Td>
-                <ScoreRowColumn key={3} val={val3} valSetter={setVal3} />
-              </Td>
-            )}
-            {playersArray.length > 3 && (
-              <Td>
-                <ScoreRowColumn key={4} val={val4} valSetter={setVal4} />
-              </Td>
-            )}
-            {playersArray.length > 4 && (
-              <Td>
-                <ScoreRowColumn key={5} val={val5} valSetter={setVal5} />
-              </Td>
-            )}
-            {playersArray.length > 5 && (
-              <Td>
-                <ScoreRowColumn key={6} val={val6} valSetter={setVal6} />
-              </Td>
-            )}
-            {playersArray.length > 6 && (
-              <Td>
-                <ScoreRowColumn key={7} val={val7} valSetter={setVal7} />
-              </Td>
-            )}
-            {playersArray.length > 7 && (
-              <Td>
-                <ScoreRowColumn key={8} val={val8} valSetter={setVal8} />
-              </Td>
-            )} */}
+            {scoresArray &&
+              scoresArray.map((score, idx) => {
+                return (
+                  <Td key={idx}>
+                    <ScoreRowColumn
+                      key={idx}
+                      index={idx}
+                      val={scoresArray[idx]}
+                      rewriteScoresArray={rewriteScoresArray}
+                    />
+                  </Td>
+                );
+              })}
           </Tr>
         </Tbody>
       </Table>

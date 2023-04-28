@@ -14,7 +14,7 @@ import pullScoresIntoArray from "../pullScoresIntoArray";
 
 interface ScoreboardProps {
   gameState: Game;
-  playersArray: Array<string | null>;
+  playersArray: Array<string>;
   onOpen: () => void;
 }
 
@@ -53,7 +53,7 @@ const Scoreboard = ({ gameState, playersArray, onOpen }: ScoreboardProps) => {
                 </Th>
                 {category.scores &&
                   category.scores.length > 0 &&
-                  pullScoresIntoArray(category).map((value, vk) => (
+                  pullScoresIntoArray(category, playersArray.length).map((value, vk) => (
                     <Td key={vk + 3000} backgroundColor={"white"}>
                       <Center key={vk + 7000}>{value}</Center>
                     </Td>

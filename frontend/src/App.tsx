@@ -19,7 +19,7 @@ import ScoringModalBody from "./components/ScoringModalBody";
 function App() {
   const [gameState, setGameState] = useState<Game | null>(null);
   const [json, setJson] = useState<boolean>(false);
-  let playersArray: Array<string | null> = [];
+  let playersArray: Array<string> = [];
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -37,18 +37,13 @@ function App() {
   const gameObject = JSON.stringify(gameState, null, 2);
 
   if (gameState) {
-    playersArray = [
-      gameState.playerName1,
-      gameState.playerName2,
-      gameState.playerName3,
-      gameState.playerName4,
-      gameState.playerName5,
-      gameState.playerName6,
-      gameState.playerName7,
-      gameState.playerName8,
-    ]
-      .map((name) => (typeof name === "string" ? name : null))
-      .filter((name) => name !== null);
+    for (let p = 1; p <= 8; p++) {
+      const key = `playerName${p}` as keyof Game;
+      const name = gameState[key] as string | null;
+      if (name !== null) {
+        playersArray.push(name);
+      }
+    }
   }
 
   const toggleJson: () => void = () => {
