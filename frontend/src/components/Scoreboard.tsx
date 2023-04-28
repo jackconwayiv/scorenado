@@ -8,9 +8,9 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import colorArray from "./Colors";
-import { Game } from "./Models";
-import pullScoresIntoArray from "./pullScoresIntoArray";
+import colorArray from "../Colors";
+import { Game } from "../Models";
+import pullScoresIntoArray from "../pullScoresIntoArray";
 
 interface ScoreboardProps {
   gameState: Game;

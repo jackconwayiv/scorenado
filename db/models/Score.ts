@@ -5,7 +5,7 @@ import { sequelize } from ".";
 
 interface ScoreAttributes {
   id: number;
-  value1: number;
+  value1: number | null;
   value2: number | null;
   value3: number | null;
   value4: number | null;
@@ -36,11 +36,7 @@ const Score = sequelize.define<ScoreInstance>("Score", {
   },
   value1: {
     type: DataType.INTEGER,
-    allowNull: false,
-    validate: {
-      notNull: true,
-      notEmpty: true,
-    },
+    allowNull: true,
   },
   value2: {
     type: DataType.INTEGER,

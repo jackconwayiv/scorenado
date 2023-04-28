@@ -1,8 +1,15 @@
 import { Button, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Category, Game } from "./Models";
+import { Category, Game } from "../Models";
+import pullScoresIntoArray from "../pullScoresIntoArray";
 import ScoreRowColumn from "./ScoreRowColumn";
+
+interface ScoreSubmission {
+  gameId: number;
+  categoryId: number;
+  [key: string]: number | null;
+}
 
 interface ScoringModalBodyProps {
   gameId: number;
@@ -16,44 +23,41 @@ const ScoringModalBody = ({
   category,
   playersArray,
 }: ScoringModalBodyProps) => {
-  const [val1, setVal1] = useState<number | null>(null);
-  const [val2, setVal2] = useState<number | null>(null);
-  const [val3, setVal3] = useState<number | null>(null);
-  const [val4, setVal4] = useState<number | null>(null);
-  const [val5, setVal5] = useState<number | null>(null);
-  const [val6, setVal6] = useState<number | null>(null);
-  const [val7, setVal7] = useState<number | null>(null);
-  const [val8, setVal8] = useState<number | null>(null);
+  const [scoresArray, setScoresArray] = useState<Array<number | null>>([]);
+
+  //one state array of scores for this category
 
   useEffect(() => {
-    if (category && category.scores && category.scores.length) {
-      setVal1(category.scores[0].value1);
-      setVal2(category.scores[0].value2);
-      setVal3(category.scores[0].value3);
-      setVal4(category.scores[0].value4);
-      setVal5(category.scores[0].value5);
-      setVal6(category.scores[0].value6);
-      setVal7(category.scores[0].value7);
-      setVal8(category.scores[0].value8);
+    if (category && category.scores && category.scores.length > 0) {
+      setScoresArray(pullScoresIntoArray(category));
+    } else {
+      setScoresArray(
+        playersArray.map((player) => {
+          return null;
+        }),
+      );
     }
-  }, [category, category.scores]);
+  }, [category, playersArray]);
+
+  const rewriteScoresArray = (index: number, value: number) => {
+    const newArray = [...scoresArray];
+    newArray[index] = value;
+    setScoresArray(newArray);
+  };
+
+  const buildScoreSubmission = () => {
+    let scoreSubmission: ScoreSubmission = { gameId, categoryId: category.id };
+    scoresArray.forEach((score, i) => {
+      return (scoreSubmission[`value${i + 1}`] = score);
+    });
+    return scoreSubmission;
+  };
 
   //loops numberOfPlayers times and makes a score column for each player
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const scoreSubmission = {
-      value1: val1,
-      value2: val2,
-      value3: val3,
-      value4: val4,
-      value5: val5,
-      value6: val6,
-      value7: val7,
-      value8: val8,
-      gameId,
-      categoryId: category.id,
-    };
-    if (category.scores.length > 0) {
+    const scoreSubmission = buildScoreSubmission();
+    if (category.scores[0] && category.scores[0].id) {
       await axios.put(`/api/score`, scoreSubmission);
     } else {
       await axios.post(`/api/score`, scoreSubmission);
@@ -63,27 +67,9 @@ const ScoringModalBody = ({
     setGameState(data);
   };
 
-  // const concatenator = (index: number) => {
-  //   return { val: `val${index}`, valSetter: `setVal${index}` };
-  // };
-
-  // const renderDataFields = (category: Category) => {
-  //   const scoreArray = pullScoresIntoArray(category);
-  //   scoreArray.map((score, index) => (
-  //     <td>
-  //       <input
-  //         value={score}
-  //         onChange={(e) => {
-  //           `setVal${index + 1}`;
-  //           parseInt(e.target.value);
-  //         }}
-  //       ></input>
-  //     </td>
-  //   ));
-  // };
-
   return (
     <div>
+      {JSON.stringify(scoresArray)}
       <Table>
         <Thead>
           <Tr>
@@ -94,10 +80,16 @@ const ScoringModalBody = ({
         </Thead>
         <Tbody>
           <Tr>
+            {/* map over scores array in state */}
             <Td>
-              <ScoreRowColumn key={1} val={val1} valSetter={setVal1} />
+              <ScoreRowColumn
+                key={1}
+                index={0}
+                val={scoresArray[0]}
+                rewriteScoresArray={rewriteScoresArray}
+              />
             </Td>
-            {playersArray.length > 1 && (
+            {/* {playersArray.length > 1 && (
               <Td>
                 <ScoreRowColumn key={2} val={val2} valSetter={setVal2} />
               </Td>
@@ -131,7 +123,7 @@ const ScoringModalBody = ({
               <Td>
                 <ScoreRowColumn key={8} val={val8} valSetter={setVal8} />
               </Td>
-            )}
+            )} */}
           </Tr>
         </Tbody>
       </Table>

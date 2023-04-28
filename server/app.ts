@@ -44,7 +44,7 @@ app.get("/api/games/:id", async (req: Request, res: Response) => {
         },
       ],
     });
-    res.send(myGame);
+    res.status(201).send(myGame);
   } catch (error: unknown) {
     console.error(
       `Sorry, we encountered an error while trying to load game #${req.params.id}: `,

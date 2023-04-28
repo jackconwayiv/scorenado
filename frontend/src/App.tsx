@@ -13,8 +13,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Game } from "./Models";
-import Scoreboard from "./Scoreboard";
-import ScoringModalBody from "./ScoringModalBody";
+import Scoreboard from "./components/Scoreboard";
+import ScoringModalBody from "./components/ScoringModalBody";
 
 function App() {
   const [gameState, setGameState] = useState<Game | null>(null);
