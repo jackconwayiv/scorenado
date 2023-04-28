@@ -13,7 +13,7 @@ const ScoreRowColumn = ({
 }: ScoreRowColumnProps) => {
   return (
     <Input
-      value={val || ""}
+      value={val || 0}
       onChange={(e) => rewriteScoresArray(index, parseInt(e.target.value))}
     ></Input>
   );

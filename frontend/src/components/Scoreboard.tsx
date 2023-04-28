@@ -7,18 +7,25 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from "@chakra-ui/react";
 import colorArray from "../Colors";
 import { Game } from "../Models";
 import pullScoresIntoArray from "../pullScoresIntoArray";
+import ScoringModalFrame from "./ScoringModalFrame";
 
 interface ScoreboardProps {
   gameState: Game;
+  setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
   playersArray: Array<string>;
-  onOpen: () => void;
 }
 
-const Scoreboard = ({ gameState, playersArray, onOpen }: ScoreboardProps) => {
+const Scoreboard = ({
+  gameState,
+  setGameState,
+  playersArray,
+}: ScoreboardProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
       <Heading>{gameState.template.name} Scoreboard</Heading>
@@ -46,18 +53,23 @@ const Scoreboard = ({ gameState, playersArray, onOpen }: ScoreboardProps) => {
               <Tr key={ck + 4000}>
                 <Th
                   key={ck + 2000}
-                  onClick={onOpen}
+                  onClick={() => {
+                    const onOpener = onOpen;
+                    onOpener();
+                  }}
                   backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
                 >
                   <Center key={ck + 8000}>{category.name.toUpperCase()}</Center>
                 </Th>
                 {category.scores &&
                   category.scores.length > 0 &&
-                  pullScoresIntoArray(category, playersArray.length).map((value, vk) => (
-                    <Td key={vk + 3000} backgroundColor={"white"}>
-                      <Center key={vk + 7000}>{value}</Center>
-                    </Td>
-                  ))}
+                  pullScoresIntoArray(category, playersArray.length).map(
+                    (value, vk) => (
+                      <Td key={vk + 3000} backgroundColor={"white"}>
+                        <Center key={vk + 7000}>{value}</Center>
+                      </Td>
+                    ),
+                  )}
               </Tr>
             ))}
           <Tr>
@@ -66,6 +78,14 @@ const Scoreboard = ({ gameState, playersArray, onOpen }: ScoreboardProps) => {
           </Tr>
         </Tbody>
       </Table>
+      <ScoringModalFrame
+        gameId={gameState.id}
+        category={gameState.template.categories[1]}
+        isOpen={isOpen}
+        onClose={onClose}
+        playersArray={playersArray}
+        setGameState={setGameState}
+      />
     </div>
   );
 };

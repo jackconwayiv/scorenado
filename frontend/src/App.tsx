@@ -1,20 +1,9 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Game } from "./Models";
 import Scoreboard from "./components/Scoreboard";
-import ScoringModalBody from "./components/ScoringModalBody";
 
 function App() {
   const [gameState, setGameState] = useState<Game | null>(null);
@@ -50,12 +39,6 @@ function App() {
     setJson(!json);
   };
 
-  const {
-    isOpen: isOpen1,
-    onOpen: onOpen1,
-    onClose: onClose1,
-  } = useDisclosure();
-
   //className="App-header"
   if (!gameState) {
     return (
@@ -83,32 +66,9 @@ function App() {
           )}
           <Scoreboard
             gameState={gameState}
+            setGameState={setGameState}
             playersArray={playersArray}
-            onOpen={onOpen1}
           />
-          <Modal isOpen={isOpen1} size={"full"} onClose={onClose1}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>
-                Scores for {gameState.template.categories[0].name.toUpperCase()}
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                <ScoringModalBody
-                  gameId={gameState.id}
-                  setGameState={setGameState}
-                  playersArray={playersArray}
-                  category={gameState.template.categories[0]}
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button colorScheme="blue" mr={3} onClick={onClose1}>
-                  Close
-                </Button>
-                <Button variant="ghost">Secondary Action</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
         </div>
         <Button
           my={"30px"}
