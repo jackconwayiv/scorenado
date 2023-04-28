@@ -16,6 +16,8 @@ function App() {
     fetchGame();
   }, []);
 
+  const gameObject = JSON.stringify(gameState, null, 2);
+
   if (gameState) {
     playersArray = [
       gameState.playerName1,
@@ -41,75 +43,72 @@ function App() {
     );
   } else {
     return (
-      <div className="App">
-        <header className="pixelated">SCORENADO</header>
-        {/* map over categories and render this component: */}
-        <table>
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[0].name}
-            categoryId={gameState.template.categories[0].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[1].name}
-            categoryId={gameState.template.categories[1].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[2].name}
-            categoryId={gameState.template.categories[2].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[3].name}
-            categoryId={gameState.template.categories[3].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[4].name}
-            categoryId={gameState.template.categories[4].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[5].name}
-            categoryId={gameState.template.categories[5].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[6].name}
-            categoryId={gameState.template.categories[6].id}
-            playersArray={playersArray}
-          />
-          <tr>
-            <td>TOTAL:</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-              <button>Confirm</button>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <>
+        <div className="App">
+          <header className="pixelated">SCORENADO</header>
+          {/* map over categories and render this component: */}
+          <table>
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[0]}
+            />
+            {/* will have to filter for category with correct id, not just position in array*/}
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[1]}
+            />
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[2]}
+            />
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[3]}
+            />
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[4]}
+            />
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[5]}
+            />
+            <ScoreRow
+              gameId={gameState.id}
+              setGameState={setGameState}
+              playersArray={playersArray}
+              category={gameState.template.categories[6]}
+            />
+            <tr>
+              <td>TOTAL:</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button>Confirm</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <pre>{gameObject}</pre>
+      </>
     );
   }
 }

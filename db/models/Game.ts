@@ -13,6 +13,7 @@ interface GameAttributes {
   playerName6: string | null;
   playerName7: string | null;
   playerName8: string | null;
+  templateId?: number;
 }
 
 interface GameCreationAttributes extends Optional<GameAttributes, "id"> {}

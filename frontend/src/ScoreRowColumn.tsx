@@ -1,8 +1,8 @@
 import React from "react";
 
 interface ScoreRowColumnProps {
-  val: string | null;
-  valSetter: React.Dispatch<React.SetStateAction<string | null>>;
+  val: number | null;
+  valSetter: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const ScoreRowColumn = ({ val, valSetter }: ScoreRowColumnProps) => {
@@ -11,7 +11,7 @@ const ScoreRowColumn = ({ val, valSetter }: ScoreRowColumnProps) => {
       <input
         value={val || ""}
         size={5}
-        onChange={(e) => valSetter(e.target.value)}
+        onChange={(e) => valSetter(parseInt(e.target.value))}
       ></input>
     </td>
   );

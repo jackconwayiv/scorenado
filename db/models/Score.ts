@@ -13,6 +13,8 @@ interface ScoreAttributes {
   value6: number | null;
   value7: number | null;
   value8: number | null;
+  categoryId?: number;
+  gameId?: number;
 }
 
 interface ScoreCreationAttributes extends Optional<ScoreAttributes, "id"> {}

@@ -64,6 +64,31 @@ app.post("/api/score", async (req: Request, res: Response) => {
     );
   }
 });
+app.put("/api/score", async (req: Request, res: Response) => {
+  try {
+    const { categoryId, gameId } = req.body;
+    if (!categoryId || !gameId) {
+      throw new Error("Your update request is missing required fields.");
+    }
+    const [rowsUpdated, [updatedScore]] = await Score.update(req.body, {
+      where: {
+        categoryId,
+        gameId,
+      },
+      returning: true, // ensure that updated record is returned
+    });
+    if (rowsUpdated === 0) {
+      throw new Error("No scores were updated.");
+    }
+    res.send(updatedScore);
+  } catch (error: unknown) {
+    console.error(
+      "Sorry, we encountered an error while trying to update that score: ",
+      error,
+    );
+    res.status(500).send({ message: "Internal server error." });
+  }
+});
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
 // app.use((req, res, next) => {
