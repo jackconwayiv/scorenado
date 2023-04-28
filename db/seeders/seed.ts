@@ -7,10 +7,10 @@ import sequelize from "../index";
 const firstGame = {
   id: 1,
   templateId: 1,
-  playerName1: "Jennifer",
-  playerName2: "Roger",
-  playerName3: "Sally",
-  playerName4: "Leroy",
+  playerName1: "Walt",
+  playerName2: "Jesse",
+  playerName3: "Hank",
+  playerName4: "Gomez",
   // playerName5: null,
   // playerName6: null,
   // playerName7: null,
@@ -19,14 +19,14 @@ const firstGame = {
 const currentGame = {
   id: 2,
   templateId: 1,
-  playerName1: "Alphonso",
-  playerName2: "Cecilia",
-  playerName3: "Edmure",
-  playerName4: "Gretchen",
-  playerName5: "Izzy",
-  playerName6: "Katie",
-  playerName7: "Michael",
-  playerName8: "Oswald",
+  playerName1: "Jimmy",
+  playerName2: "Kim",
+  playerName3: "Mike",
+  playerName4: "Gustavo",
+  playerName5: "Chuck",
+  playerName6: "Nacho",
+  playerName7: "Lalo",
+  playerName8: "Howard",
 };
 
 const wingspanTemplate = {
