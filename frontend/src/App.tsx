@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Game } from "./Models";
 import ScoreRow from "./ScoreRow";
+import Scoreboard from "./Scoreboard";
 
 function App() {
   const [gameState, setGameState] = useState<Game | null>(null);
@@ -10,7 +11,7 @@ function App() {
 
   useEffect(() => {
     const fetchGame = async () => {
-      const { data } = await axios.get<Game>(`/api/games/2`);
+      const { data } = await axios.get<Game>(`/api/games/1`);
       setGameState(data);
     };
     fetchGame();
@@ -46,6 +47,7 @@ function App() {
       <>
         <div className="App">
           <header className="pixelated">SCORENADO</header>
+          <Scoreboard gameState={gameState} playersArray={playersArray} />
           {/* map over categories and render this component: */}
           <table>
             <ScoreRow
