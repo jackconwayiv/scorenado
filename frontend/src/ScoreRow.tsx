@@ -1,7 +1,15 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Game } from "./Models";
 import ScoreRowColumn from "./ScoreRowColumn";
+
+interface ScoreRowProps {
+  gameId: number;
+  setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
+  categoryName: string;
+  categoryId: number;
+  playersArray: Array<string | null>;
+}
 
 const ScoreRow = ({
   gameId,
@@ -9,7 +17,7 @@ const ScoreRow = ({
   categoryName,
   categoryId,
   playersArray,
-}) => {
+}: ScoreRowProps) => {
   const [val1, setVal1] = useState<string | null>(null);
   const [val2, setVal2] = useState<string | null>(null);
   const [val3, setVal3] = useState<string | null>(null);
@@ -18,10 +26,10 @@ const ScoreRow = ({
   const [val6, setVal6] = useState<string | null>(null);
   const [val7, setVal7] = useState<string | null>(null);
   const [val8, setVal8] = useState<string | null>(null);
-  //gotta grab the score object for each category and make an array of 'em
 
   //loops numberOfPlayers times and makes a score column for each player
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     const scoreSubmission = {
       value1: val1,
       value2: val2,
@@ -35,7 +43,7 @@ const ScoreRow = ({
       categoryId,
     };
     await axios.post(`/api/score`, scoreSubmission);
-    //should do error handling, check status code
+    // should do error handling, check status code
     const { data } = await axios.get<Game>(`/api/games/${gameId}`);
     setGameState(data);
   };
@@ -43,6 +51,7 @@ const ScoreRow = ({
   return (
     <div>
       {JSON.stringify(playersArray)}
+
       <form>
         <tr>
           <td width="5px">{categoryName.toUpperCase()}</td>
@@ -55,7 +64,7 @@ const ScoreRow = ({
           <ScoreRowColumn val={val7} valSetter={setVal7} />
           <ScoreRowColumn val={val8} valSetter={setVal8} />
           <td width="5px">
-            <button onClick={() => handleSubmit()}>Score</button>
+            <button onClick={(e: any) => handleSubmit(e)}>Score</button>
           </td>
         </tr>
       </form>

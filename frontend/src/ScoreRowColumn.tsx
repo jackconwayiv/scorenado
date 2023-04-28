@@ -1,5 +1,11 @@
 import React from "react";
-const ScoreRowColumn = ({ val, valSetter }) => {
+
+interface ScoreRowColumnProps {
+  val: string | null;
+  valSetter: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const ScoreRowColumn = ({ val, valSetter }: ScoreRowColumnProps) => {
   return (
     <td>
       <input

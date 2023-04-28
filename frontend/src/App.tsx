@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Game } from "./Models";
 import ScoreRow from "./ScoreRow";
@@ -92,13 +92,6 @@ function App() {
             setGameState={setGameState}
             categoryName={gameState.template.categories[6].name}
             categoryId={gameState.template.categories[6].id}
-            playersArray={playersArray}
-          />
-          <ScoreRow
-            gameId={gameState.id}
-            setGameState={setGameState}
-            categoryName={gameState.template.categories[7].name}
-            categoryId={gameState.template.categories[7].id}
             playersArray={playersArray}
           />
           <tr>
