@@ -1,3 +1,4 @@
+import { Input } from "@chakra-ui/react";
 import React from "react";
 
 interface ScoreRowColumnProps {
@@ -7,13 +8,10 @@ interface ScoreRowColumnProps {
 
 const ScoreRowColumn = ({ val, valSetter }: ScoreRowColumnProps) => {
   return (
-    <td>
-      <input
-        value={val || ""}
-        size={5}
-        onChange={(e) => valSetter(parseInt(e.target.value))}
-      ></input>
-    </td>
+    <Input
+      value={val || ""}
+      onChange={(e) => valSetter(parseInt(e.target.value))}
+    ></Input>
   );
 };
 

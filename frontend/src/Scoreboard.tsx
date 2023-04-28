@@ -1,29 +1,27 @@
-import { Center, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Center,
+  Heading,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import colorArray from "./Colors";
-import { Category, Game } from "./Models";
+import { Game } from "./Models";
+import pullScoresIntoArray from "./pullScoresIntoArray";
 
 interface ScoreboardProps {
   gameState: Game;
   playersArray: Array<string | null>;
+  onOpen: () => void;
 }
 
-const Scoreboard = ({ gameState, playersArray }: ScoreboardProps) => {
-  const pullScoresIntoArray = (category: Category) => {
-    return [
-      category.scores[0].value1,
-      category.scores[0].value2,
-      category.scores[0].value3,
-      category.scores[0].value4,
-      category.scores[0].value5,
-      category.scores[0].value6,
-      category.scores[0].value7,
-      category.scores[0].value8,
-    ];
-  };
-
+const Scoreboard = ({ gameState, playersArray, onOpen }: ScoreboardProps) => {
   return (
     <div>
-      <div>Scoreboard</div>
+      <Heading>{gameState.template.name} Scoreboard</Heading>
       <Table>
         <Thead>
           <Tr>
@@ -45,7 +43,7 @@ const Scoreboard = ({ gameState, playersArray }: ScoreboardProps) => {
           {gameState.template &&
             gameState.template.categories.length > 0 &&
             gameState.template.categories.map((category, ck) => (
-              <Tr key={ck + 4000}>
+              <Tr key={ck + 4000} onClick={onOpen}>
                 <Th
                   key={ck + 2000}
                   backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
