@@ -1,30 +1,21 @@
-import {
-  Button,
-  Heading,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { Button, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category, Game } from "./Models";
 import ScoreRowColumn from "./ScoreRowColumn";
 
-interface ScoringModalProps {
+interface ScoringModalBodyProps {
   gameId: number;
   setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
   category: Category;
   playersArray: Array<string | null>;
 }
-const ScoringModal = ({
+const ScoringModalBody = ({
   gameId,
   setGameState,
   category,
   playersArray,
-}: ScoringModalProps) => {
+}: ScoringModalBodyProps) => {
   const [val1, setVal1] = useState<number | null>(null);
   const [val2, setVal2] = useState<number | null>(null);
   const [val3, setVal3] = useState<number | null>(null);
@@ -93,52 +84,52 @@ const ScoringModal = ({
 
   return (
     <div>
-       <Table>
+      <Table>
         <Thead>
           <Tr>
-            {playersArray.map((player) => (
-              <Th>{player}</Th>
+            {playersArray.map((player, pi) => (
+              <Th key={pi}>{player}</Th>
             ))}
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
             <Td>
-              <ScoreRowColumn val={val1} valSetter={setVal1} />
+              <ScoreRowColumn key={1} val={val1} valSetter={setVal1} />
             </Td>
             {playersArray.length > 1 && (
               <Td>
-                <ScoreRowColumn val={val2} valSetter={setVal2} />
+                <ScoreRowColumn key={2} val={val2} valSetter={setVal2} />
               </Td>
             )}
             {playersArray.length > 2 && (
               <Td>
-                <ScoreRowColumn val={val3} valSetter={setVal3} />
+                <ScoreRowColumn key={3} val={val3} valSetter={setVal3} />
               </Td>
             )}
             {playersArray.length > 3 && (
               <Td>
-                <ScoreRowColumn val={val4} valSetter={setVal4} />
+                <ScoreRowColumn key={4} val={val4} valSetter={setVal4} />
               </Td>
             )}
             {playersArray.length > 4 && (
               <Td>
-                <ScoreRowColumn val={val5} valSetter={setVal5} />
+                <ScoreRowColumn key={5} val={val5} valSetter={setVal5} />
               </Td>
             )}
             {playersArray.length > 5 && (
               <Td>
-                <ScoreRowColumn val={val6} valSetter={setVal6} />
+                <ScoreRowColumn key={6} val={val6} valSetter={setVal6} />
               </Td>
             )}
             {playersArray.length > 6 && (
               <Td>
-                <ScoreRowColumn val={val7} valSetter={setVal7} />
+                <ScoreRowColumn key={7} val={val7} valSetter={setVal7} />
               </Td>
             )}
             {playersArray.length > 7 && (
               <Td>
-                <ScoreRowColumn val={val8} valSetter={setVal8} />
+                <ScoreRowColumn key={8} val={val8} valSetter={setVal8} />
               </Td>
             )}
           </Tr>
@@ -149,4 +140,4 @@ const ScoringModal = ({
   );
 };
 
-export default ScoringModal;
+export default ScoringModalBody;

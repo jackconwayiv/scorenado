@@ -38,7 +38,7 @@ const wingspanTemplate = {
 const wingspanCategories = [
   {
     id: 1,
-    name: "birds",
+    name: "bird cards",
     description: "points from bird cards in your tableau",
     isScored: false,
     isManualTotal: false,
@@ -62,7 +62,7 @@ const wingspanCategories = [
   },
   {
     id: 4,
-    name: "eggs",
+    name: "eggs on cards",
     description: "each egg is worth 1 point",
     isScored: false,
     isManualTotal: false,
@@ -86,7 +86,7 @@ const wingspanCategories = [
   },
   {
     id: 7,
-    name: "nectar",
+    name: "nectar rewards",
     description:
       "for each habitat, most nectar is 5 points and second most is 2 points",
     isScored: false,

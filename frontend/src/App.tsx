@@ -14,19 +14,25 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Game } from "./Models";
 import Scoreboard from "./Scoreboard";
-import ScoringModal from "./ScoringModal";
+import ScoringModalBody from "./ScoringModalBody";
 
 function App() {
   const [gameState, setGameState] = useState<Game | null>(null);
+  const [json, setJson] = useState<boolean>(false);
   let playersArray: Array<string | null> = [];
 
   useEffect(() => {
     const fetchGame = async () => {
-      const { data } = await axios.get<Game>(`/api/games/1`);
+      const { data } = await axios.get<Game>(`/api/games/2`);
       setGameState(data);
     };
     fetchGame();
   }, []);
+
+  const swapGame = async (id: number) => {
+    const { data } = await axios.get<Game>(`/api/games/${id}`);
+    setGameState(data);
+  };
 
   const gameObject = JSON.stringify(gameState, null, 2);
 
@@ -44,6 +50,10 @@ function App() {
       .map((name) => (typeof name === "string" ? name : null))
       .filter((name) => name !== null);
   }
+
+  const toggleJson: () => void = () => {
+    setJson(!json);
+  };
 
   const {
     isOpen: isOpen1,
@@ -64,9 +74,24 @@ function App() {
       <>
         <div className="App">
           <header className="pixelated">SCORENADO</header>
-          <Scoreboard gameState={gameState} playersArray={playersArray} onOpen={onOpen1} />
-          <Button onClick={onOpen1}>Open Modal</Button>
-          <Modal isOpen={isOpen1} onClose={onClose1}>
+          {gameState.id === 2 && (
+            <Button
+              backgroundColor={"blue.200"}
+              onClick={() => swapGame(1)}
+            >{`Swap`}</Button>
+          )}
+          {gameState.id === 1 && (
+            <Button
+              backgroundColor={"yellow.200"}
+              onClick={() => swapGame(2)}
+            >{`Swap`}</Button>
+          )}
+          <Scoreboard
+            gameState={gameState}
+            playersArray={playersArray}
+            onOpen={onOpen1}
+          />
+          <Modal isOpen={isOpen1} size={"full"} onClose={onClose1}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>
@@ -74,7 +99,7 @@ function App() {
               </ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <ScoringModal
+                <ScoringModalBody
                   gameId={gameState.id}
                   setGameState={setGameState}
                   playersArray={playersArray}
@@ -90,7 +115,14 @@ function App() {
             </ModalContent>
           </Modal>
         </div>
-        <pre>{gameObject}</pre>
+        <Button
+          my={"30px"}
+          backgroundColor={"green.200"}
+          onClick={() => toggleJson()}
+        >
+          JSON
+        </Button>
+        {json && <pre>{gameObject}</pre>}
       </>
     );
   }

@@ -43,9 +43,10 @@ const Scoreboard = ({ gameState, playersArray, onOpen }: ScoreboardProps) => {
           {gameState.template &&
             gameState.template.categories.length > 0 &&
             gameState.template.categories.map((category, ck) => (
-              <Tr key={ck + 4000} onClick={onOpen}>
+              <Tr key={ck + 4000}>
                 <Th
                   key={ck + 2000}
+                  onClick={onOpen}
                   backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
                 >
                   <Center key={ck + 8000}>{category.name.toUpperCase()}</Center>
