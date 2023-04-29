@@ -1,22 +1,22 @@
 import { Input } from "@chakra-ui/react";
 
-interface ScoreRowColumnProps {
+interface ScoringModalRowColumnProps {
   val: number | null;
   index: number;
   rewriteScoresArray: (index: number, value: number) => void;
 }
 
-const ScoreRowColumn = ({
+const ScoringModalRowColumn = ({
   val,
   index,
   rewriteScoresArray,
-}: ScoreRowColumnProps) => {
+}: ScoringModalRowColumnProps) => {
   return (
     <Input
-      value={val || 0}
+      value={val || ""}
       onChange={(e) => rewriteScoresArray(index, parseInt(e.target.value))}
     ></Input>
   );
 };
 
-export default ScoreRowColumn;
+export default ScoringModalRowColumn;

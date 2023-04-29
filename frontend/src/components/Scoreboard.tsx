@@ -9,6 +9,7 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import colorArray from "../Colors";
 import { Game } from "../Models";
 import pullScoresIntoArray from "../pullScoresIntoArray";
@@ -25,6 +26,24 @@ const Scoreboard = ({
   setGameState,
   playersArray,
 }: ScoreboardProps) => {
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState<number>(0);
+
+  const changeCategory = (val: number) => {
+    setActiveCategoryIndex(activeCategoryIndex + val);
+  };
+
+  const determinePosition = (num: number) => {
+    let position: string = "";
+    if (num === 0) {
+      position = "beginning";
+    } else if (num === gameState.template.categories.length - 1) {
+      position = "end";
+    } else position = "middle";
+    return position;
+  };
+
+  const position = determinePosition(activeCategoryIndex);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
@@ -54,8 +73,8 @@ const Scoreboard = ({
                 <Th
                   key={ck + 2000}
                   onClick={() => {
-                    const onOpener = onOpen;
-                    onOpener();
+                    setActiveCategoryIndex(ck);
+                    onOpen();
                   }}
                   backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
                 >
@@ -80,8 +99,10 @@ const Scoreboard = ({
       </Table>
       <ScoringModalFrame
         gameId={gameState.id}
-        category={gameState.template.categories[1]}
+        category={gameState.template.categories[activeCategoryIndex]}
         isOpen={isOpen}
+        changeCategory={changeCategory}
+        position={position}
         onClose={onClose}
         playersArray={playersArray}
         setGameState={setGameState}

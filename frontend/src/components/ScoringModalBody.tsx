@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category, Game } from "../Models";
 import pullScoresIntoArray from "../pullScoresIntoArray";
-import ScoreRowColumn from "./ScoreRowColumn";
+import ScoringModalRowColumn from "./ScoringModalRowColumn";
 
 interface ScoreSubmission {
   gameId: number;
@@ -80,7 +80,7 @@ const ScoringModalBody = ({
               scoresArray.map((score, idx) => {
                 return (
                   <Td key={idx}>
-                    <ScoreRowColumn
+                    <ScoringModalRowColumn
                       key={idx}
                       index={idx}
                       val={scoresArray[idx]}

@@ -5,9 +5,7 @@ const pullScoresIntoArray = (category: Category, players: number) => {
   for (let p = 1; p <= players; p++) {
     const key = `value${p}` as keyof Score;
     const scoreValue = category.scores[0][key] as number | null;
-    if (scoreValue !== null) {
-      scoresArray.push(scoreValue);
-    }
+    scoresArray.push(scoreValue);
   }
   return scoresArray;
 };

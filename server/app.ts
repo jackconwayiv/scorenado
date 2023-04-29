@@ -75,7 +75,7 @@ app.put("/api/score", async (req: Request, res: Response) => {
         categoryId,
         gameId,
       },
-      returning: true, // ensure that updated record is returned
+      returning: true,
     });
     if (rowsUpdated === 0) {
       throw new Error("No scores were updated.");

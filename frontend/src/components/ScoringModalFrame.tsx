@@ -1,5 +1,6 @@
 import {
   Button,
+  Heading,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -7,6 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from "@chakra-ui/react";
 import { Category, Game } from "../Models";
 import ScoringModalBody from "./ScoringModalBody";
@@ -16,6 +18,8 @@ interface ScoringModalFrameProps {
   category: Category;
   isOpen: boolean;
   onClose: () => void;
+  changeCategory: (val: number) => void;
+  position: string;
   playersArray: string[];
   setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
 }
@@ -25,6 +29,8 @@ const ScoringModalFrame = ({
   category,
   isOpen,
   onClose,
+  changeCategory,
+  position,
   setGameState,
   playersArray,
 }: ScoringModalFrameProps) => {
@@ -33,7 +39,8 @@ const ScoringModalFrame = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          Scores for {category.name.toUpperCase()}
+          <Heading>Score {category.name.toUpperCase()}</Heading>
+          <Text>{category.description}</Text>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -45,10 +52,25 @@ const ScoringModalFrame = ({
           />
         </ModalBody>
         <ModalFooter>
+          <Button
+            colorScheme="blue"
+            mr={3}
+            isDisabled={position === "beginning"}
+            onClick={() => changeCategory(-1)}
+          >
+            Previous
+          </Button>
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
+          <Button
+            colorScheme="blue"
+            mr={3}
+            isDisabled={position === "end"}
+            onClick={() => changeCategory(1)}
+          >
+            Next
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
