@@ -92,6 +92,12 @@ app.post("/api/templates/:id", async (req: Request, res: Response) => {
     const newGame = await Game.create({
       playerName1: "Player1",
       playerName2: "Player2",
+      playerName3: "Player3",
+      playerName4: "Player4",
+      playerName5: "Player5",
+      playerName6: "Player6",
+      playerName7: "Player7",
+      playerName8: "Player8",
       templateId,
     });
     res.send(newGame);

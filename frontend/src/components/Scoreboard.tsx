@@ -78,8 +78,15 @@ const Scoreboard = () => {
     return (
       <>
         <div className="App">
-          <h1 style={{ marginTop: "20px" }} className="pixelated">
-            Scoreboard for {gameState.template.name} Game 00{gameState.id}
+          <h1
+            style={{
+              marginTop: "20px",
+              marginBottom: "20px",
+              textAlign: "left",
+            }}
+            className="pixelated"
+          >
+            {gameState.template.name} Game #{gameState.id}
           </h1>
           <Table>
             <Thead>
@@ -115,14 +122,20 @@ const Scoreboard = () => {
                       <Center>{category.name.toUpperCase()}</Center>
                     </Th>
                     {category.scores &&
-                      category.scores.length > 0 &&
-                      pullScoresIntoArray(category, playersArray.length).map(
-                        (value, vk) => (
-                          <Td key={vk} backgroundColor={"white"}>
-                            <Center>{value}</Center>
-                          </Td>
-                        ),
-                      )}
+                      (category.scores.length > 0
+                        ? pullScoresIntoArray(
+                            category,
+                            playersArray.length,
+                          ).map((value, vk) => (
+                            <Td key={vk} backgroundColor={"white"}>
+                              <Center>{value}</Center>
+                            </Td>
+                          ))
+                        : playersArray.map((player, index) => (
+                            <Td key={index} backgroundColor={"white"}>
+                              <Center> </Center>
+                            </Td>
+                          )))}
                   </Tr>
                 ))}
               <Tr>

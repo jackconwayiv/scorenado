@@ -54,7 +54,9 @@ const Navigation = () => {
               >
                 Load Game
               </MenuItem>
-              <MenuItem icon={<EditIcon />}>New Template</MenuItem>
+              <MenuItem icon={<EditIcon />} onClick={() => navigate(`/template`)}>
+                New Template
+              </MenuItem>
             </MenuList>
           </Menu>
         </div>
