@@ -1,6 +1,16 @@
-import { Button, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import colorArray from "../Colors";
 import { Category, Game } from "../Models";
 import pullScoresIntoArray from "../pullScoresIntoArray";
 import ScoringModalRowColumn from "./ScoringModalRowColumn";
@@ -13,6 +23,7 @@ interface ScoreSubmission {
 
 interface ScoringModalBodyProps {
   gameId: number;
+  initialRef: React.MutableRefObject<null>;
   setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
   category: Category;
   playersArray: Array<string>;
@@ -20,6 +31,7 @@ interface ScoringModalBodyProps {
 const ScoringModalBody = ({
   gameId,
   setGameState,
+  initialRef,
   category,
   playersArray,
 }: ScoringModalBodyProps) => {
@@ -64,13 +76,23 @@ const ScoringModalBody = ({
     setGameState(data);
   };
 
+  //maxwidth 350 looked great on mobile
   return (
     <div>
-      <Table>
+      <Table minW="300px" maxW="700px">
         <Thead>
           <Tr>
             {playersArray.map((player, pi) => (
-              <Th key={pi}>{player}</Th>
+              <Th
+                key={pi}
+                minWidth={"10px"}
+                maxWidth={"12px"}
+                p={"5px"}
+                color={"black"}
+                backgroundColor={colorArray[pi]}
+              >
+                <Center>{player}</Center>
+              </Th>
             ))}
           </Tr>
         </Thead>
@@ -79,8 +101,9 @@ const ScoringModalBody = ({
             {scoresArray &&
               scoresArray.map((score, idx) => {
                 return (
-                  <Td key={idx}>
+                  <Td key={idx} minWidth="10px" maxWidth="12px">
                     <ScoringModalRowColumn
+                      initialRef={initialRef}
                       key={idx}
                       index={idx}
                       val={scoresArray[idx]}
@@ -96,5 +119,5 @@ const ScoringModalBody = ({
     </div>
   );
 };
-
+//have a -1 or +1 value here that allows handleSubmit to also handle navigating back or forth
 export default ScoringModalBody;

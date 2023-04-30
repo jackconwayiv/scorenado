@@ -3,13 +3,13 @@ import {
   Heading,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
+import React from "react";
 import { Category, Game } from "../Models";
 import ScoringModalBody from "./ScoringModalBody";
 
@@ -34,21 +34,30 @@ const ScoringModalFrame = ({
   setGameState,
   playersArray,
 }: ScoringModalFrameProps) => {
+  const initialRef = React.useRef(null);
+
+  //maxW 400 looked great on mobile
+
   return (
-    <Modal isOpen={isOpen} size={"full"} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      size={"xl"}
+      onClose={onClose}
+      initialFocusRef={initialRef}
+    >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent minW="390px" maxW="750px" minH="600px">
         <ModalHeader>
-          <Heading>Score {category.name.toUpperCase()}</Heading>
-          <Text>{category.description}</Text>
+          <Heading size="md">Score {category.name.toUpperCase()}</Heading>
+          <Text fontSize="sm">{category.description}</Text>
         </ModalHeader>
-        <ModalCloseButton />
         <ModalBody>
           <ScoringModalBody
             gameId={gameId}
             setGameState={setGameState}
             playersArray={playersArray}
             category={category}
+            initialRef={initialRef}
           />
         </ModalBody>
         <ModalFooter>
