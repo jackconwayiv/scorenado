@@ -13,6 +13,7 @@ import { useState } from "react";
 import colorArray from "../Colors";
 import { Game } from "../Models";
 import pullScoresIntoArray from "../pullScoresIntoArray";
+import ScoreboardTotalCell from "./ScoreboardTotalCell";
 import ScoringModalFrame from "./ScoringModalFrame";
 
 interface ScoreboardProps {
@@ -93,7 +94,14 @@ const Scoreboard = ({
             ))}
           <Tr>
             <Th backgroundColor={"gray.50"}>TOTAL</Th>
-            <Td></Td>
+            {playersArray.map((player: string, index: number) => {
+              return (
+                <ScoreboardTotalCell
+                  index={index}
+                  template={gameState.template}
+                />
+              );
+            })}
           </Tr>
         </Tbody>
       </Table>
