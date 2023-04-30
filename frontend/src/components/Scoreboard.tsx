@@ -50,7 +50,7 @@ const Scoreboard = () => {
       setGameState(data);
     };
     fetchGame();
-  }, []);
+  }, [gameIdToLoad]);
 
   if (gameState) {
     for (let p = 1; p <= 8; p++) {

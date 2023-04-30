@@ -29,11 +29,11 @@ const Navigation = () => {
       >
         <div>
           <h1
-            style={{ fontSize: "40px" }}
+            style={{ fontSize: "40px", cursor: "pointer" }}
             className="pixelated"
             onClick={() => navigate(`/`)}
           >
-            🌪️ Scorenado
+            _Scorenado
           </h1>
         </div>
         <div>
@@ -48,7 +48,12 @@ const Navigation = () => {
               <MenuItem icon={<PlusSquareIcon />} onClick={() => navigate(`/`)}>
                 New Game
               </MenuItem>
-              <MenuItem icon={<RepeatIcon />}>Load Game</MenuItem>
+              <MenuItem
+                icon={<RepeatIcon />}
+                onClick={() => navigate(`/games`)}
+              >
+                Load Game
+              </MenuItem>
               <MenuItem icon={<EditIcon />}>New Template</MenuItem>
             </MenuList>
           </Menu>

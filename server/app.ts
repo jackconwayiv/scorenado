@@ -53,7 +53,27 @@ app.get("/api/games/:id", async (req: Request, res: Response) => {
   }
 });
 
-//fetch all templates - for landing page / new game page
+//fetch all games - for load game page - eventually should only return YOUR incomplete games
+app.get("/api/games", async (req: Request, res: Response) => {
+  try {
+    const allGames = await Game.findAll({
+      include: [
+        {
+          model: Template,
+          as: "template",
+        },
+      ],
+    });
+    res.send(allGames);
+  } catch (error: unknown) {
+    console.error(
+      `Sorry, we encountered an error while trying to load your games: `,
+      error,
+    );
+  }
+});
+
+//fetch all templates - for landing / new game page
 app.get("/api/templates", async (req: Request, res: Response) => {
   try {
     const allTemplates = await Template.findAll();

@@ -1,13 +1,11 @@
-import { Card, Center, Flex } from "@chakra-ui/react";
+import { Flex, Wrap } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Template } from "../Models";
-import { brightArray, gradientArray } from "../colorArray";
+import GameCard from "./GameCard";
 
 const NewGame = () => {
-  //need to declare a style object and pass it into the mapped cards AND the + card to ensure consistency
-
   const navigate = useNavigate();
 
   const [allGameTemplates, setAllGameTemplates] = useState<Template[]>([]);
@@ -27,45 +25,31 @@ const NewGame = () => {
 
   return (
     <div>
+      <h1 className="pixelated">New Game</h1>
       <Flex flexDirection={"row"} justifyContent={"space-evenly"}>
-        {allGameTemplates &&
-          allGameTemplates.length > 0 &&
-          allGameTemplates.map((template, index) => {
-            return (
-              <Card
-                border={`2px black solid`}
-                bgGradient={`linear(to-br, ${brightArray[index + 4]}, ${
-                  gradientArray[index + 4]
-                })`}
-                textAlign={"center"}
-                boxShadow={"xl"}
-                rounded={"2xl"}
-                padding={"10px"}
-                onClick={() => createNewGame(template.id)}
-                key={template.id}
-              >
-                <Center w="200px" h="200px">
-                  <span style={{ fontSize: "18px" }} className="pixelated">
-                    {template.name.toUpperCase()}
-                  </span>
-                </Center>
-              </Card>
-            );
-          })}
-        <Card
-          border={`2px black solid`}
-          bgGradient={`linear(to-br, gray.100, gray.500)`}
-          textAlign={"center"}
-          boxShadow={"xl"}
-          rounded={"2xl"}
-          padding={"10px"}
-        >
-          <Center w="200px" h="200px">
-            <span style={{ fontSize: "100px" }} className="pixelated">
-              +
-            </span>
-          </Center>
-        </Card>
+        <Wrap>
+          {allGameTemplates &&
+            allGameTemplates.length > 0 &&
+            allGameTemplates.map((template, index) => {
+              return (
+                <GameCard
+                  key={index}
+                  type={"newGame"}
+                  index={index}
+                  callback={createNewGame}
+                  text={template.name}
+                  id={template.id}
+                />
+              );
+            })}
+          <GameCard
+            type={"newTemplate"}
+            index={0}
+            callback={() => alert("new template time")}
+            text={"+"}
+            id={0}
+          />
+        </Wrap>
       </Flex>
     </div>
   );
