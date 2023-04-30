@@ -86,6 +86,25 @@ app.get("/api/templates", async (req: Request, res: Response) => {
   }
 });
 
+//creates a new template, then attaches all categories to that template (hopefully in sequence)
+app.post("/api/templates", async (req: Request, res: Response) => {
+  try {
+    const newTemplateData = req.body.newTemplate;
+    const newTemplate = await Template.create({ ...newTemplateData });
+    const categories = req.body.categories;
+    categories.forEach(
+      async (category: any) =>
+        await Category.create({ ...category, templateId: newTemplate.id }),
+    );
+    res.status(201).send(newTemplate);
+  } catch (error: unknown) {
+    console.error(
+      `Sorry, we encountered an error while trying to create a new game template and its corresponding scoring categories: `,
+      error,
+    );
+  }
+});
+
 app.post("/api/templates/:id", async (req: Request, res: Response) => {
   try {
     const templateId: number = parseInt(req.params.id);

@@ -89,11 +89,12 @@ const CategoryCreatorRow = ({
         </Box>
       </Flex>
       {index > 0 && (
-        <Box>
+        <Box style={{ overflow: "auto" }}>
           <Button
-            color={"red"}
-            backgroundColor={"gray.100"}
-            border={"1px solid gray"}
+            style={{ float: "right" }}
+            color="red"
+            backgroundColor="gray.100"
+            border="1px solid gray"
             onClick={() => updateCategoryState(1, index, "delete")}
           >
             DELETE

@@ -1,5 +1,7 @@
 import { Box, Button, Center, Checkbox, Flex, Input } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import colorArray from "../colorArray";
 import CategoryCreatorRow from "./CategoryCreatorRow";
 
@@ -11,18 +13,12 @@ interface CategoryObject {
 }
 
 const NewTemplate = () => {
-  //TEMPLATE
-  //id
-  //name
-  //scoredByRound
-  //lowScoreWins
+  const navigate = useNavigate();
 
   const [templateName, setTemplateName] = useState("");
   const [scoredByRounds, setScoredByRounds] = useState(false);
   const [lowScoreWins, setLowScoreWins] = useState(false);
   const [categories, setCategories] = useState<CategoryObject[]>([
-    { name: "", description: "", isScored: true, isManualTotal: false },
-    { name: "", description: "", isScored: true, isManualTotal: false },
     { name: "", description: "", isScored: true, isManualTotal: false },
   ]); //array of objects
 
@@ -61,10 +57,14 @@ const NewTemplate = () => {
     setCategories(newCategoryArray);
   };
 
-  const handleTemplateSubmit = () => {
+  const handleTemplateSubmit = async () => {
     const newTemplate = { name: templateName, scoredByRounds, lowScoreWins };
-    //axios create a template
-    //axios create a bunch of categories all attached to the new template ID
+    const request = {
+      newTemplate,
+      categories: categories.filter((category: any) => category.name),
+    };
+    await axios.post(`/api/templates`, request);
+    navigate(`/`);
   };
 
   return (
@@ -124,24 +124,26 @@ const NewTemplate = () => {
           />
         );
       })}
-
-      <Button
-        border={"1px solid gray"}
-        backgroundColor={"teal.200"}
-        isDisabled={categories.length > 11}
-        onClick={() => updateCategoryState(1, 1, "add")}
-      >
-        ADD
-      </Button>
-
-      <Button
-        border={"1px solid gray"}
-        backgroundColor={"yellow"}
-        isDisabled={!templateName || !categories[0].name}
-        onClick={() => handleTemplateSubmit()}
-      >
-        SUBMIT TEMPLATE
-      </Button>
+      <Flex my="20px" justifyContent="center">
+        <Button
+          border={"1px solid gray"}
+          mx="30px"
+          backgroundColor={"teal.200"}
+          isDisabled={categories.length > 11}
+          onClick={() => updateCategoryState(1, 1, "add")}
+        >
+          ADD CATEGORY
+        </Button>
+        <Button
+          border={"1px solid gray"}
+          backgroundColor={"yellow"}
+          mx="30px"
+          isDisabled={!templateName || !categories[0].name}
+          onClick={() => handleTemplateSubmit()}
+        >
+          SUBMIT TEMPLATE
+        </Button>
+      </Flex>
     </div>
   );
 };

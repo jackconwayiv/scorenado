@@ -44,7 +44,7 @@ const NewGame = () => {
           <GameCard
             type={"newTemplate"}
             index={0}
-            callback={() => alert("new template time")}
+            callback={() => navigate(`/template`)}
             text={"+"}
             id={0}
           />
