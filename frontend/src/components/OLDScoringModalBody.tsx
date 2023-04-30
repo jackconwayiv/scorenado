@@ -35,8 +35,12 @@ const ScoringModalBody = ({
   category,
   playersArray,
 }: ScoringModalBodyProps) => {
-  
+
+
+
   const [scoresArray, setScoresArray] = useState<Array<number | null>>([]);
+
+  // ========
 
   useEffect(() => {
     if (category && category.scores && category.scores.length > 0) {

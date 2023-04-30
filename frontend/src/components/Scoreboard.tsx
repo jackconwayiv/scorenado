@@ -13,7 +13,7 @@ import colorArray from "../Colors";
 import { Game } from "../Models";
 import pullScoresIntoArray from "../pullScoresIntoArray";
 import ScoreboardTotalCell from "./ScoreboardTotalCell";
-import ScoringModalFrame from "./ScoringModalFrame";
+import ScoringModal from "./ScoringModal";
 
 interface ScoreboardProps {
   gameState: Game;
@@ -107,7 +107,7 @@ const Scoreboard = ({
           </Tr>
         </Tbody>
       </Table>
-      <ScoringModalFrame
+      <ScoringModal
         gameId={gameState.id}
         category={gameState.template.categories[activeCategoryIndex]}
         isOpen={isOpen}
