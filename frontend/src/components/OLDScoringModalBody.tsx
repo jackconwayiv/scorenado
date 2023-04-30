@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import colorArray from "../Colors";
 import { Category, Game } from "../Models";
+import colorArray from "../colorArray";
 import pullScoresIntoArray from "../pullScoresIntoArray";
 import ScoringModalRowColumn from "./ScoringModalRowColumn";
 

@@ -53,6 +53,36 @@ app.get("/api/games/:id", async (req: Request, res: Response) => {
   }
 });
 
+//fetch all templates - for landing page / new game page
+app.get("/api/templates", async (req: Request, res: Response) => {
+  try {
+    const allTemplates = await Template.findAll();
+    res.send(allTemplates);
+  } catch (error: unknown) {
+    console.error(
+      `Sorry, we encountered an error while trying to load game templates: `,
+      error,
+    );
+  }
+});
+
+app.post("/api/templates/:id", async (req: Request, res: Response) => {
+  try {
+    const templateId: number = parseInt(req.params.id);
+    const newGame = await Game.create({
+      playerName1: "Player1",
+      playerName2: "Player2",
+      templateId,
+    });
+    res.send(newGame);
+  } catch (error: unknown) {
+    console.error(
+      "Sorry, we encountered an error while trying to create that game: ",
+      error,
+    );
+  }
+});
+
 app.post("/api/score", async (req: Request, res: Response) => {
   try {
     const newScore = await Score.create(req.body);
@@ -64,6 +94,7 @@ app.post("/api/score", async (req: Request, res: Response) => {
     );
   }
 });
+
 app.put("/api/score", async (req: Request, res: Response) => {
   try {
     const { categoryId, gameId } = req.body;

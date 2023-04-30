@@ -11,7 +11,12 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 const Navigation = () => {
+  const navigate = useNavigate();
+
+  //props for command in MenuItem: command="⌘N" command="⌘⇧N" command="⌘O"
+
   return (
     <div>
       <div
@@ -26,7 +31,7 @@ const Navigation = () => {
           <h1
             style={{ fontSize: "40px" }}
             className="pixelated"
-            onClick={() => alert("yo")}
+            onClick={() => navigate(`/`)}
           >
             🌪️ Scorenado
           </h1>
@@ -40,15 +45,11 @@ const Navigation = () => {
               variant="outline"
             />
             <MenuList>
-              <MenuItem icon={<PlusSquareIcon />} command="⌘N">
+              <MenuItem icon={<PlusSquareIcon />} onClick={() => navigate(`/`)}>
                 New Game
               </MenuItem>
-              <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-                Load Game
-              </MenuItem>
-              <MenuItem icon={<EditIcon />} command="⌘O">
-                New Template
-              </MenuItem>
+              <MenuItem icon={<RepeatIcon />}>Load Game</MenuItem>
+              <MenuItem icon={<EditIcon />}>New Template</MenuItem>
             </MenuList>
           </Menu>
         </div>
