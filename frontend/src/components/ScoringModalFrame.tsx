@@ -36,8 +36,6 @@ const ScoringModalFrame = ({
 }: ScoringModalFrameProps) => {
   const initialRef = React.useRef(null);
 
-  //maxW 400 looked great on mobile
-
   return (
     <Modal
       isOpen={isOpen}
@@ -46,7 +44,7 @@ const ScoringModalFrame = ({
       initialFocusRef={initialRef}
     >
       <ModalOverlay />
-      <ModalContent minW="390px" maxW="750px" minH="600px">
+      <ModalContent minW="390px" maxW="750px">
         <ModalHeader>
           <Heading size="md">Score {category.name.toUpperCase()}</Heading>
           <Text fontSize="sm">{category.description}</Text>

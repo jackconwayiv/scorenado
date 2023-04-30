@@ -1,8 +1,9 @@
-import { Button, useDisclosure } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Game } from "./Models";
+import Navigation from "./components/Navigation";
 import Scoreboard from "./components/Scoreboard";
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
   if (!gameState) {
     return (
       <div className="App">
-        <header className="pixelated">SCORENADO</header>
+        <Navigation />
         <div>LOADING DATA...</div>
       </div>
     );
@@ -51,7 +52,7 @@ function App() {
     return (
       <>
         <div className="App">
-          <header className="pixelated">SCORENADO</header>
+          <Navigation />
           {gameState.id === 2 && (
             <Button
               backgroundColor={"blue.200"}

@@ -1,6 +1,5 @@
 import {
   Center,
-  Heading,
   Table,
   Tbody,
   Td,
@@ -48,7 +47,9 @@ const Scoreboard = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
-      <Heading>{gameState.template.name} Scoreboard</Heading>
+      <h1 style={{ marginTop: "20px" }} className="pixelated">
+        Scoreboard for {gameState.template.name} Game 00{gameState.id}
+      </h1>
       <Table>
         <Thead>
           <Tr>
@@ -98,6 +99,7 @@ const Scoreboard = ({
               return (
                 <ScoreboardTotalCell
                   index={index}
+                  key={index}
                   template={gameState.template}
                 />
               );

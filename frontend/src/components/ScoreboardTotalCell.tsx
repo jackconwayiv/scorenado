@@ -1,4 +1,4 @@
-import { Td } from "@chakra-ui/react";
+import { Center, Td } from "@chakra-ui/react";
 import { Score, Template } from "../Models";
 
 interface ScoreboardTotalCellProps {
@@ -19,7 +19,11 @@ const ScoreboardTotalCell = ({ template, index }: ScoreboardTotalCellProps) => {
     });
     return total;
   };
-  return <Td>{addUpPlayerTotal(index, template)}</Td>;
+  return (
+    <Td backgroundColor="yellow.100" p="0px">
+      <Center fontWeight={"bold"}>{addUpPlayerTotal(index, template)}</Center>
+    </Td>
+  );
 };
 
 export default ScoreboardTotalCell;

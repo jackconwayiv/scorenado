@@ -35,6 +35,7 @@ const ScoringModalBody = ({
   category,
   playersArray,
 }: ScoringModalBodyProps) => {
+  
   const [scoresArray, setScoresArray] = useState<Array<number | null>>([]);
 
   useEffect(() => {
@@ -76,7 +77,6 @@ const ScoringModalBody = ({
     setGameState(data);
   };
 
-  //maxwidth 350 looked great on mobile
   return (
     <div>
       <Table minW="300px" maxW="700px">
