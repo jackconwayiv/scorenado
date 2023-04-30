@@ -24,7 +24,6 @@ const LoadGame = () => {
 
   return (
     <div>
-      <h1 className="pixelated">Load Game</h1>
       <Flex flexDirection={"row"} justifyContent={"space-evenly"}>
         <Wrap>
           {allGames &&

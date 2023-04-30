@@ -62,11 +62,6 @@ const Scoreboard = () => {
     }
   }
 
-  const swapGame = async (id: number) => {
-    const { data } = await axios.get<Game>(`/api/games/${id}`);
-    setGameState(data);
-  };
-
   const gameObject = JSON.stringify(gameState, null, 2);
 
   const toggleJson: () => void = () => {
@@ -83,18 +78,6 @@ const Scoreboard = () => {
     return (
       <>
         <div className="App">
-          {gameState.id === 2 && (
-            <Button
-              backgroundColor={"blue.200"}
-              onClick={() => swapGame(1)}
-            >{`Swap`}</Button>
-          )}
-          {gameState.id === 1 && (
-            <Button
-              backgroundColor={"yellow.200"}
-              onClick={() => swapGame(2)}
-            >{`Swap`}</Button>
-          )}
           <h1 style={{ marginTop: "20px" }} className="pixelated">
             Scoreboard for {gameState.template.name} Game 00{gameState.id}
           </h1>

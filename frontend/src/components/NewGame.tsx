@@ -25,7 +25,6 @@ const NewGame = () => {
 
   return (
     <div>
-      <h1 className="pixelated">New Game</h1>
       <Flex flexDirection={"row"} justifyContent={"space-evenly"}>
         <Wrap>
           {allGameTemplates &&
