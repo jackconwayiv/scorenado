@@ -1,7 +1,6 @@
 import {
   Button,
   Center,
-  Heading,
   Modal,
   ModalBody,
   ModalContent,
@@ -49,8 +48,6 @@ const ScoringModal = ({
   setGameState,
   playersArray,
 }: ScoringModalProps) => {
-  const initialRef = React.useRef(null);
-
   const [scoresArray, setScoresArray] = useState<Array<number | null>>([]);
 
   useEffect(() => {
@@ -79,8 +76,7 @@ const ScoringModal = ({
     return scoreSubmission;
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async (num: number) => {
     const scoreSubmission = buildScoreSubmission();
     if (category.scores[0] && category.scores[0].id) {
       await axios.put(`/api/score`, scoreSubmission);
@@ -90,19 +86,26 @@ const ScoringModal = ({
     // should do error handling, check status code
     const { data } = await axios.get<Game>(`/api/games/${gameId}`);
     setGameState(data);
+    if (num === 0) {
+      onClose();
+    } else changeCategory(num);
   };
 
   return (
     <Modal
+      isCentered
       isOpen={isOpen}
       size={"xl"}
       onClose={onClose}
-      initialFocusRef={initialRef}
+      onOverlayClick={() => handleSubmit(0)}
+      motionPreset="slideInRight"
     >
       <ModalOverlay />
       <ModalContent minW="390px" maxW="750px">
         <ModalHeader>
-          <Heading size="md">Score {category.name.toUpperCase()}</Heading>
+          <h1 className="pixelated">
+            now scoring {category.name.toUpperCase()}
+          </h1>
           <Text fontSize="sm">{category.description}</Text>
         </ModalHeader>
         <ModalBody>
@@ -131,7 +134,6 @@ const ScoringModal = ({
                       return (
                         <Td key={idx} minWidth="10px" maxWidth="12px">
                           <ScoringModalRowColumn
-                            initialRef={initialRef}
                             key={idx}
                             index={idx}
                             val={scoresArray[idx]}
@@ -143,26 +145,38 @@ const ScoringModal = ({
                 </Tr>
               </Tbody>
             </Table>
-            <Button onClick={(e: any) => handleSubmit(e)}>Score</Button>
           </div>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Button
             colorScheme="blue"
             mr={3}
+            tabIndex={91}
             isDisabled={position === "beginning"}
-            onClick={() => changeCategory(-1)}
+            onClick={(e: any) => handleSubmit(-1)}
           >
             Previous
           </Button>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button
+            colorScheme="blue"
+            mr={3}
+            tabIndex={92}
+            size="sm"
+            variant="ghost"
+            onClick={(e: any) => handleSubmit(0)}
+          >
             Close
           </Button>
           <Button
             colorScheme="blue"
             mr={3}
             isDisabled={position === "end"}
-            onClick={() => changeCategory(1)}
+            tabIndex={90}
+            onClick={(e: any) => handleSubmit(1)}
           >
             Next
           </Button>

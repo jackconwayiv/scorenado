@@ -71,23 +71,22 @@ const Scoreboard = ({
           {gameState.template &&
             gameState.template.categories.length > 0 &&
             gameState.template.categories.map((category, ck) => (
-              <Tr key={ck + 4000}>
-                <Th
-                  key={ck + 2000}
-                  onClick={() => {
-                    setActiveCategoryIndex(ck);
-                    onOpen();
-                  }}
-                  backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
-                >
-                  <Center key={ck + 8000}>{category.name.toUpperCase()}</Center>
+              <Tr
+                key={ck}
+                onClick={() => {
+                  setActiveCategoryIndex(ck);
+                  onOpen();
+                }}
+              >
+                <Th backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}>
+                  <Center>{category.name.toUpperCase()}</Center>
                 </Th>
                 {category.scores &&
                   category.scores.length > 0 &&
                   pullScoresIntoArray(category, playersArray.length).map(
                     (value, vk) => (
-                      <Td key={vk + 3000} backgroundColor={"white"}>
-                        <Center key={vk + 7000}>{value}</Center>
+                      <Td key={vk} backgroundColor={"white"}>
+                        <Center>{value}</Center>
                       </Td>
                     ),
                   )}

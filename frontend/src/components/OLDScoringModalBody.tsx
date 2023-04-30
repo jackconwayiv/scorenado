@@ -23,7 +23,6 @@ interface ScoreSubmission {
 
 interface ScoringModalBodyProps {
   gameId: number;
-  initialRef: React.MutableRefObject<null>;
   setGameState: React.Dispatch<React.SetStateAction<Game | null>>;
   category: Category;
   playersArray: Array<string>;
@@ -31,13 +30,9 @@ interface ScoringModalBodyProps {
 const ScoringModalBody = ({
   gameId,
   setGameState,
-  initialRef,
   category,
   playersArray,
 }: ScoringModalBodyProps) => {
-
-
-
   const [scoresArray, setScoresArray] = useState<Array<number | null>>([]);
 
   // ========
@@ -107,7 +102,6 @@ const ScoringModalBody = ({
                 return (
                   <Td key={idx} minWidth="10px" maxWidth="12px">
                     <ScoringModalRowColumn
-                      initialRef={initialRef}
                       key={idx}
                       index={idx}
                       val={scoresArray[idx]}
