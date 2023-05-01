@@ -24,7 +24,7 @@ const LoadGame = () => {
 
   return (
     <div>
-      <Flex flexDirection={"row"} justifyContent={"space-evenly"}>
+      <Flex maxW="920px" flexDirection={"row"} justifyContent={"space-evenly"}>
         <Wrap>
           {allGames &&
             allGames.length > 0 &&

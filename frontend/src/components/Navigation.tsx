@@ -18,7 +18,7 @@ const Navigation = () => {
   //props for command in MenuItem: command="⌘N" command="⌘⇧N" command="⌘O"
 
   return (
-    <div>
+    <div style={{ width: "920px" }}>
       <div
         style={{
           display: "flex",
@@ -33,7 +33,7 @@ const Navigation = () => {
             className="pixelated"
             onClick={() => navigate(`/`)}
           >
-            _Scorenado
+            Scorenado
           </h1>
         </div>
         <div>
@@ -54,7 +54,10 @@ const Navigation = () => {
               >
                 Load Game
               </MenuItem>
-              <MenuItem icon={<EditIcon />} onClick={() => navigate(`/template`)}>
+              <MenuItem
+                icon={<EditIcon />}
+                onClick={() => navigate(`/template`)}
+              >
                 New Template
               </MenuItem>
             </MenuList>

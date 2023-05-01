@@ -35,9 +35,22 @@ const brightArray = [
   ...brightArrayOnce,
   ...brightArrayOnce,
   ...brightArrayOnce,
+  ...brightArrayOnce,
+  ...brightArrayOnce,
+  ...brightArrayOnce,
 ];
-const colorArray = [...colorArrayOnce, ...colorArrayOnce, ...colorArrayOnce];
+const colorArray = [
+  ...colorArrayOnce,
+  ...colorArrayOnce,
+  ...colorArrayOnce,
+  ...colorArrayOnce,
+  ...colorArrayOnce,
+  ...colorArrayOnce,
+];
 const gradientArray = [
+  ...gradientArrayOnce,
+  ...gradientArrayOnce,
+  ...gradientArrayOnce,
   ...gradientArrayOnce,
   ...gradientArrayOnce,
   ...gradientArrayOnce,

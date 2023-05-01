@@ -25,7 +25,7 @@ const NewGame = () => {
 
   return (
     <div>
-      <Flex flexDirection={"row"} justifyContent={"space-evenly"}>
+      <Flex maxW="920px" flexDirection={"row"} justifyContent={"space-evenly"}>
         <Wrap>
           {allGameTemplates &&
             allGameTemplates.length > 0 &&

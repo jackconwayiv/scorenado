@@ -88,15 +88,20 @@ const Scoreboard = () => {
           >
             {gameState.template.name} Game #{gameState.id}
           </h1>
-          <Table>
+          <Table width="920px">
             <Thead>
               <Tr>
-                <Th>CATEGORY</Th>
+                <Th px="1px" mx="0px" width="100px">
+                  CATEGORY
+                </Th>
                 {playersArray &&
                   playersArray.length &&
                   playersArray.map((player, pk) => (
                     <Th
                       key={pk + 1000}
+                      width="100px"
+                      px="1px"
+                      mx="0px"
                       color={"black"}
                       backgroundColor={colorArray[pk]}
                     >

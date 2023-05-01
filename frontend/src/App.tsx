@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer";
 import LoadGame from "./components/LoadGame";
 import Navigation from "./components/Navigation";
 import NewGame from "./components/NewGame";
@@ -20,6 +21,7 @@ function App() {
           <Route path="/template" element={<NewTemplate />} />
           <Route path="/*" element={<NewGame />} />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );
