@@ -1,4 +1,4 @@
-// import db from "./db";
+
 import { sequelize } from "./models";
 
 import Category from "./models/Category";
@@ -7,6 +7,7 @@ import Score from "./models/Score";
 import Template from "./models/Template";
 
 // Game.belongsTo(User);
+// this should be many to many?
 
 Template.hasMany(Game, {
   sourceKey: "id",

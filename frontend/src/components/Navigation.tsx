@@ -15,8 +15,6 @@ import { useNavigate } from "react-router-dom";
 const Navigation = () => {
   const navigate = useNavigate();
 
-  //props for command in MenuItem: command="⌘N" command="⌘⇧N" command="⌘O"
-
   return (
     <div style={{ width: "920px" }}>
       <div

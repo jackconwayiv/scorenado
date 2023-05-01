@@ -6,14 +6,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 
-// Configure Express to use EJS
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "ejs");
-
-// static file-serving middleware
-// app.use(express.static(path.join(__dirname, "..", "public")));
-
-//feels incorrect to re-include Game at the deepest nest level but this produces the desired data shape (for now)
+//can I remove "Game" from deepest level and still get Scores only by game?
 app.get("/api/games/:id", async (req: Request, res: Response) => {
   try {
     const gameId: number = parseInt(req.params.id);
@@ -105,6 +98,7 @@ app.post("/api/templates", async (req: Request, res: Response) => {
   }
 });
 
+//creates a new instance of a game by template
 app.post("/api/templates/:id", async (req: Request, res: Response) => {
   try {
     const templateId: number = parseInt(req.params.id);
@@ -128,6 +122,7 @@ app.post("/api/templates/:id", async (req: Request, res: Response) => {
   }
 });
 
+//create initial score records
 app.post("/api/score", async (req: Request, res: Response) => {
   try {
     const newScore = await Score.create(req.body);
@@ -140,6 +135,7 @@ app.post("/api/score", async (req: Request, res: Response) => {
   }
 });
 
+//update existing score records
 app.put("/api/score", async (req: Request, res: Response) => {
   try {
     const { categoryId, gameId } = req.body;
@@ -165,28 +161,5 @@ app.put("/api/score", async (req: Request, res: Response) => {
     res.status(500).send({ message: "Internal server error." });
   }
 });
-
-// any remaining requests with an extension (.js, .css, etc.) send 404
-// app.use((req, res, next) => {
-//   if (path.extname(req.path).length) {
-//     const err = new Error("Not found");
-//     err.status = 404;
-//     next(err);
-//   } else {
-//     next();
-//   }
-// });
-
-// sends index.html
-// app.use("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "..", "public/index.html"));
-// });
-
-// error handling endware
-// app.use((err, req, res, next) => {
-//   console.error(err);
-//   console.error(err.stack);
-//   res.status(err.status || 500).send(err.message || "Internal server error.");
-// });
 
 export default app;

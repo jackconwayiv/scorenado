@@ -15,9 +15,4 @@ const init = async () => {
     console.log(ex);
   }
 };
-
-// app.get("/", (req: Request, res: Response) => {
-//   res.send("Express + TypeScript Server is running");
-// });
-
 init();

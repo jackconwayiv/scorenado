@@ -1,6 +1,5 @@
 //no users for v0;
 
-// import db from "../db";
 import { Category, Game, Score, Template } from "../";
 import sequelize from "../index";
 
@@ -236,8 +235,6 @@ const seedDatabase = async () => {
     score.categoryId = (await wingspanCats[index]).id;
     await Score.create(score);
   });
-  // await Score.sync({ force: true });
-  // await Score.create(firstScore);
   console.log("Seeding successful!");
   // await sequelize.close();
 };

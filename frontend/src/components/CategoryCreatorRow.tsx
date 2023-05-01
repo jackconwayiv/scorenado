@@ -12,13 +12,6 @@ const CategoryCreatorRow = ({
   updateCategoryState,
   index,
 }: CategoryCreatorRowProps) => {
-  //CATEGORY
-  //id
-  //name
-  //description
-  //isScored
-  //isManualTotal
-  //templateId
 
   return (
     <Box

@@ -1,7 +1,6 @@
 import { Model, Optional } from "sequelize";
 import { DataType } from "sequelize-typescript";
 import { sequelize } from ".";
-//DataTypes ??
 
 interface CategoryAttributes {
   id: number;

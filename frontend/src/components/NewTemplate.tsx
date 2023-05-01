@@ -20,7 +20,7 @@ const NewTemplate = () => {
   const [lowScoreWins, setLowScoreWins] = useState(false);
   const [categories, setCategories] = useState<CategoryObject[]>([
     { name: "", description: "", isScored: true, isManualTotal: false },
-  ]); //array of objects
+  ]);
 
   const blankCategory = {
     name: "",
@@ -29,7 +29,6 @@ const NewTemplate = () => {
     isManualTotal: false,
   };
 
-  //did I write my own reducer?
   const updateCategoryState = (value: any, index: number, action: string) => {
     let newCategoryArray = [...categories];
     switch (action) {
