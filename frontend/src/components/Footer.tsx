@@ -10,7 +10,7 @@ const Footer = () => {
           textAlign: "right",
         }}
       >
-        developed by Jack Conway 2023
+        designed & developed by Jack Conway 2023
       </h1>
     </div>
   );
