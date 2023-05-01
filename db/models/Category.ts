@@ -8,7 +8,7 @@ interface CategoryAttributes {
   description?: string;
   isScored: boolean;
   isManualTotal: boolean;
-  templateId?: number;
+  templateId?: number; //this is required
 }
 
 interface CategoryCreationAttributes

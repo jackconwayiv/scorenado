@@ -10,7 +10,10 @@ const Footer = () => {
           textAlign: "right",
         }}
       >
-        designed & developed by Jack Conway 2023
+        designed & developed by{" "}
+        <a href="https://github.com/jackconwayiv/scorenado" rel="noreferrer" target="_blank">
+          Jack Conway 2023
+        </a>
       </h1>
     </div>
   );

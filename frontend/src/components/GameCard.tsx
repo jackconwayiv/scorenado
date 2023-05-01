@@ -21,7 +21,7 @@ const GameCard = ({ index, callback, text, id, type }: GameCardProps) => {
                 gradientArray[index + 4 || 0]
               })`
         }
-        cursor={type === "newTemplate" ? "cell" : "pointer"}
+        cursor={"pointer"}
         textAlign={"center"}
         boxShadow={"xl"}
         rounded={"2xl"}
