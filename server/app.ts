@@ -46,6 +46,28 @@ app.get("/api/games/:id", async (req: Request, res: Response) => {
   }
 });
 
+//edit an existing game
+app.put("/api/games/:id", async (req: Request, res: Response) => {
+  try {
+    const gameId: number = parseInt(req.params.id);
+    const [rowsUpdated, [updatedGame]] = await Game.update(req.body, {
+      where: {
+        id: gameId,
+      },
+      returning: true,
+    });
+    if (rowsUpdated === 0) {
+      throw new Error("No games were updated.");
+    }
+    res.status(201).send(updatedGame);
+  } catch (error: unknown) {
+    console.error(
+      `Sorry, we encountered an error while trying to update game #${req.params.id}: `,
+      error,
+    );
+  }
+});
+
 //fetch all games - for load game page - eventually should only return YOUR incomplete games
 app.get("/api/games", async (req: Request, res: Response) => {
   try {
