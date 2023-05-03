@@ -11,8 +11,20 @@ const Footer = () => {
         }}
       >
         designed & developed by{" "}
-        <a href="https://github.com/jackconwayiv/scorenado" rel="noreferrer" target="_blank">
+        <a
+          href="https://github.com/jackconwayiv/scorenado"
+          rel="noreferrer"
+          target="_blank"
+        >
           Jack Conway 2023
+        </a>{" "}
+        |{" "}
+        <a
+          href="https://favicon.io/emoji-favicons/tornado/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          favicon.io
         </a>
       </h1>
     </div>

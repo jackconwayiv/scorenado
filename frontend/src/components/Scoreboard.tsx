@@ -1,11 +1,14 @@
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 import {
   Button,
   Center,
   Table,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
+  Tooltip,
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -195,8 +198,18 @@ const Scoreboard = () => {
                   >
                     <Th
                       backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
+                      display="flex"
+                      flexDirection="row"
+                      justifyContent="space-evenly"
                     >
-                      <Center>{category.name.toUpperCase()}</Center>
+                      <Center>
+                        <Text>
+                          <Tooltip label={category.description} fontSize="sm">
+                            <InfoOutlineIcon />
+                          </Tooltip>
+                        </Text>
+                        <Text>{category.name.toUpperCase()}</Text>
+                      </Center>
                     </Th>
                     {category.scores &&
                       (category.scores.length > 0
