@@ -13,7 +13,7 @@ const ScoringModalRowColumn = ({
 }: ScoringModalRowColumnProps) => {
   return (
     <Input
-      value={val || ""}
+      value={val || 0}
       maxW={"35px"}
       tabIndex={index + 1}
       p={"5px"}

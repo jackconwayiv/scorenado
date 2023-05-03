@@ -1,4 +1,4 @@
-import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { InfoOutlineIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Button,
   Center,
@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 import { Game, GamePlayerUpdate } from "../Models";
 import colorArray from "../colorArray";
 import pullScoresIntoArray from "../pullScoresIntoArray";
+import randomizeAdjective from "../randomizeAdjective";
 import RenameModal from "./RenameModal";
 import ScoreboardTotalCell from "./ScoreboardTotalCell";
 import ScoringModal from "./ScoringModal";
@@ -27,7 +28,8 @@ const Scoreboard = () => {
   const [gameState, setGameState] = useState<Game | null>(null);
   const [activePlayerIndex, setActivePlayerIndex] = useState<number>(0);
   const [json, setJson] = useState<boolean>(false);
-  const [status, setStatus] = useState<string>("init");
+  const [status, setStatus] = useState<string>("playing");
+  const [adjective, setAdjective] = useState<string>("a friendly");
   let playersArray: Array<string> = [];
 
   const { gameIdToLoad } = useParams();
@@ -92,7 +94,6 @@ const Scoreboard = () => {
       } else if (action === "delete") {
         value = null;
       } else {
-        console.log(`got into edit condition with user # ${val}`);
         value = action;
       }
       const playerUpdate: GamePlayerUpdate = {
@@ -122,20 +123,23 @@ const Scoreboard = () => {
             }}
             className="pixelated"
           >
-            {gameState.template.name} Game #{gameState.id}
+            {
+              <Text onClick={() => setAdjective(randomizeAdjective())}>
+                [ {adjective} game of {gameState.template.name.toUpperCase()} ]
+              </Text>
+            }
           </h1>
           <Table width="920px">
             <Thead>
               <Tr>
-                <Th px="1px" mx="0px" width="100px">
-                  CATEGORY
-                </Th>
+                <Th px="1px" mx="0px" width="100px"></Th>
                 {playersArray &&
                   playersArray.length &&
                   playersArray.map((player, pk) => (
                     <Th
-                      key={pk + 1000}
+                      key={pk}
                       width="100px"
+                      cursor="pointer"
                       onClick={() => {
                         setActivePlayerIndex(pk);
                         onRenameOpen();
@@ -145,41 +149,30 @@ const Scoreboard = () => {
                       color={"black"}
                       backgroundColor={colorArray[pk]}
                     >
-                      <Center key={pk + 9000}>{player}</Center>
+                      <Center>{player}</Center>
                     </Th>
                   ))}
                 <Th>
-                  {status === "init" && (
-                    <Button
-                      isDisabled={playersArray.length > 7}
-                      bgColor="green.100"
-                      onClick={() => {
-                        editPlayers("add", playersArray.length + 1);
-                      }}
-                    >
-                      +
-                    </Button>
-                  )}
-                  {status === "init" && (
+                  {status === "playing" && (
                     <Button
                       isDisabled={playersArray.length < 2}
-                      bgColor="red.100"
+                      bgColor="gray.200"
                       onClick={() => {
                         editPlayers("delete", playersArray.length);
                       }}
                     >
                       -
                     </Button>
-                  )}
+                  )}{" "}
                   {status === "playing" && (
                     <Button
-                      bgColor="purple.100"
+                      isDisabled={playersArray.length > 7}
+                      bgColor="gray.200"
                       onClick={() => {
-                        // setStatus("finished");
-                        alert("take a picture or screenshot");
+                        editPlayers("add", playersArray.length + 1);
                       }}
                     >
-                      FINISH
+                      +
                     </Button>
                   )}
                 </Th>
@@ -199,18 +192,19 @@ const Scoreboard = () => {
                     <Th
                       backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
                       display="flex"
+                      cursor="pointer"
                       flexDirection="row"
                       justifyContent="space-evenly"
                     >
                       <Center>
+                        <Text>{category.name.toUpperCase()}</Text>{" "}
                         {category.description && (
-                          <Text>
+                          <Text paddingLeft="3px" paddingRight="0px">
                             <Tooltip label={category.description} fontSize="sm">
                               <InfoOutlineIcon />
                             </Tooltip>
                           </Text>
                         )}
-                        <Text>{category.name.toUpperCase()}</Text>
                       </Center>
                     </Th>
                     {category.scores &&
@@ -219,7 +213,7 @@ const Scoreboard = () => {
                             category,
                             playersArray.length,
                           ).map((value, vk) => (
-                            <Td key={vk} backgroundColor={"white"}>
+                            <Td key={vk} p="0px" backgroundColor={"white"}>
                               <Center>{value}</Center>
                             </Td>
                           ))
@@ -231,7 +225,9 @@ const Scoreboard = () => {
                   </Tr>
                 ))}
               <Tr>
-                <Th backgroundColor={"gray.50"}>TOTAL</Th>
+                <Th backgroundColor={"gray.50"}>
+                  TOTAL <ViewIcon /> <ViewOffIcon />
+                </Th>
                 {playersArray.map((player: string, index: number) => {
                   return (
                     <ScoreboardTotalCell
@@ -241,18 +237,6 @@ const Scoreboard = () => {
                     />
                   );
                 })}
-                <Td>
-                  {status === "init" && (
-                    <Button
-                      bgColor="blue.100"
-                      onClick={() => {
-                        setStatus("playing");
-                      }}
-                    >
-                      START
-                    </Button>
-                  )}
-                </Td>
               </Tr>
             </Tbody>
           </Table>
@@ -276,11 +260,22 @@ const Scoreboard = () => {
         </div>
         <Button
           my={"30px"}
-          backgroundColor={"green.200"}
+          backgroundColor={"teal.100"}
           onClick={() => toggleJson()}
         >
           JSON
-        </Button>
+        </Button>{" "}
+        {status === "playing" && (
+          <Button
+            bgColor="teal.200"
+            onClick={() => {
+              // setStatus("finished");
+              alert("take a picture or screenshot");
+            }}
+          >
+            FINISH
+          </Button>
+        )}
         {json && <pre>{gameObject}</pre>}
       </>
     );
