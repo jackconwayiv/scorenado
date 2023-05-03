@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Game } from "../Models";
+import { Game, GamePlayerUpdate } from "../Models";
 import colorArray from "../colorArray";
 import pullScoresIntoArray from "../pullScoresIntoArray";
 import ScoreboardTotalCell from "./ScoreboardTotalCell";
@@ -68,6 +68,27 @@ const Scoreboard = () => {
     setJson(!json);
   };
 
+  const editPlayers = async (action: string, val: number) => {
+    if (gameState?.id) {
+      const newPlayerNumber = val;
+      const newPlayerKey = `playerName${newPlayerNumber}`;
+      let value: string | null = null;
+      if (action === "add") {
+        value = `Player ${newPlayerNumber}`;
+      } else if (action === "delete") {
+        value = null;
+      } else {
+        value = action;
+      }
+      const playerUpdate: GamePlayerUpdate = {
+        [newPlayerKey]: value,
+      };
+      await axios.put(`/api/games/${gameState.id}`, playerUpdate);
+      const { data } = await axios.get<Game>(`/api/games/${gameIdToLoad}`);
+      setGameState(data);
+    }
+  };
+
   if (!gameState) {
     return (
       <div className="App">
@@ -108,6 +129,26 @@ const Scoreboard = () => {
                       <Center key={pk + 9000}>{player}</Center>
                     </Th>
                   ))}
+                <Th>
+                  <Button
+                    isDisabled={playersArray.length > 7}
+                    bgColor="green.100"
+                    onClick={() => {
+                      editPlayers("add", playersArray.length + 1);
+                    }}
+                  >
+                    +
+                  </Button>{" "}
+                  <Button
+                    isDisabled={playersArray.length < 2}
+                    bgColor="red.100"
+                    onClick={() => {
+                      editPlayers("delete", playersArray.length);
+                    }}
+                  >
+                    -
+                  </Button>
+                </Th>
               </Tr>
             </Thead>
             <Tbody>

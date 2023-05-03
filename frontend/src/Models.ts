@@ -1,3 +1,14 @@
+export interface GamePlayerUpdate {
+  playerName1?: string;
+  playerName2?: string | null;
+  playerName3?: string | null;
+  playerName4?: string | null;
+  playerName5?: string | null;
+  playerName6?: string | null;
+  playerName7?: string | null;
+  playerName8?: string | null;
+  // [key: string]: number | string | undefined;
+}
 export interface Game {
   id: number;
   playerName1: string;
