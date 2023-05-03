@@ -62,10 +62,17 @@ const ScoringModal = ({
     }
   }, [category, playersArray]);
 
-  const rewriteScoresArray = (index: number, value: number) => {
-    const newArray = [...scoresArray];
-    newArray[index] = value;
-    setScoresArray(newArray);
+  const rewriteScoresArray = (index: number, value: string) => {
+    const numValue = parseInt(value);
+    if (!isNaN(numValue)) {
+      const newArray = [...scoresArray];
+      newArray[index] = numValue;
+      setScoresArray(newArray);
+    } else {
+      const newArray = [...scoresArray];
+      newArray[index] = null;
+      setScoresArray(newArray);
+    }
   };
 
   const buildScoreSubmission = () => {

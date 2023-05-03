@@ -3,7 +3,7 @@ import { Input } from "@chakra-ui/react";
 interface ScoringModalRowColumnProps {
   val: number | null;
   index: number;
-  rewriteScoresArray: (index: number, value: number) => void;
+  rewriteScoresArray: (index: number, value: string) => void;
 }
 
 const ScoringModalRowColumn = ({
@@ -13,11 +13,11 @@ const ScoringModalRowColumn = ({
 }: ScoringModalRowColumnProps) => {
   return (
     <Input
-      value={val || 0}
+      value={val !== null ? val : ""}
       maxW={"35px"}
       tabIndex={index + 1}
       p={"5px"}
-      onChange={(e) => rewriteScoresArray(index, parseInt(e.target.value))}
+      onChange={(e) => rewriteScoresArray(index, e.target.value)}
     ></Input>
   );
 };
