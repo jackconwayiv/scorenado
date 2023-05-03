@@ -30,6 +30,9 @@ const Scoreboard = () => {
   const [json, setJson] = useState<boolean>(false);
   const [status, setStatus] = useState<string>("playing");
   const [adjective, setAdjective] = useState<string>("a friendly");
+  const [colorIndex, setColorIndex] = useState<Array<number>>([
+    0, 1, 2, 3, 4, 5, 6, 7,
+  ]);
   let playersArray: Array<string> = [];
 
   const { gameIdToLoad } = useParams();
@@ -132,27 +135,7 @@ const Scoreboard = () => {
           <Table width="920px">
             <Thead>
               <Tr>
-                <Th px="1px" mx="0px" width="100px"></Th>
-                {playersArray &&
-                  playersArray.length &&
-                  playersArray.map((player, pk) => (
-                    <Th
-                      key={pk}
-                      width="100px"
-                      cursor="pointer"
-                      onClick={() => {
-                        setActivePlayerIndex(pk);
-                        onRenameOpen();
-                      }}
-                      px="1px"
-                      mx="0px"
-                      color={"black"}
-                      backgroundColor={colorArray[pk]}
-                    >
-                      <Center>{player}</Center>
-                    </Th>
-                  ))}
-                <Th>
+                <Th px="1px" mx="0px" width="100px">
                   {status === "playing" && (
                     <Button
                       isDisabled={playersArray.length < 2}
@@ -176,6 +159,26 @@ const Scoreboard = () => {
                     </Button>
                   )}
                 </Th>
+                {playersArray &&
+                  playersArray.length &&
+                  playersArray.map((player, pk) => (
+                    <Th
+                      key={pk}
+                      width="100px"
+                      cursor="pointer"
+                      onClick={() => {
+                        setActivePlayerIndex(pk);
+                        onRenameOpen();
+                      }}
+                      px="1px"
+                      mx="0px"
+                      color={"black"}
+                      backgroundColor={colorArray[colorIndex[pk]]}
+                    >
+                      <Center>{player}</Center>
+                    </Th>
+                  ))}
+                <Td></Td>
               </Tr>
             </Thead>
             <Tbody>
@@ -190,7 +193,7 @@ const Scoreboard = () => {
                     }}
                   >
                     <Th
-                      backgroundColor={ck % 2 === 0 ? "gray.100" : "gray.200"}
+                      backgroundColor={ck % 2 === 0 ? "gray.50" : "gray.100"}
                       display="flex"
                       cursor="pointer"
                       flexDirection="row"
@@ -253,6 +256,8 @@ const Scoreboard = () => {
           <RenameModal
             editPlayers={editPlayers}
             isOpen={isRenameOpen}
+            colorIndex={colorIndex}
+            setColorIndex={setColorIndex}
             activePlayerIndex={activePlayerIndex}
             playersArray={playersArray}
             onClose={onRenameClose}
