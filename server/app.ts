@@ -128,11 +128,11 @@ app.post("/api/templates/:id", async (req: Request, res: Response) => {
       playerName1: "Player1",
       playerName2: "Player2",
       playerName3: "Player3",
-      playerName4: "Player4",
-      playerName5: "Player5",
-      playerName6: "Player6",
-      playerName7: "Player7",
-      playerName8: "Player8",
+      playerName4: null,
+      playerName5: null,
+      playerName6: null,
+      playerName7: null,
+      playerName8: null,
       templateId,
     });
     res.send(newGame);

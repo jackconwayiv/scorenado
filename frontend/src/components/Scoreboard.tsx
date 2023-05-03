@@ -203,11 +203,13 @@ const Scoreboard = () => {
                       justifyContent="space-evenly"
                     >
                       <Center>
-                        <Text>
-                          <Tooltip label={category.description} fontSize="sm">
-                            <InfoOutlineIcon />
-                          </Tooltip>
-                        </Text>
+                        {category.description && (
+                          <Text>
+                            <Tooltip label={category.description} fontSize="sm">
+                              <InfoOutlineIcon />
+                            </Tooltip>
+                          </Text>
+                        )}
                         <Text>{category.name.toUpperCase()}</Text>
                       </Center>
                     </Th>
